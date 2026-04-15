@@ -1,0 +1,41 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npm install:*)",
+      "Bash(superdesign --help 2>&1 || echo \"Not logged in\")",
+      "Bash(superdesign login:*)",
+      "Bash(superdesign get-design:*)",
+      "Bash(cd \"H:/Xecuit Website 2026\" && npx create-next-app@latest . --typescript --tailwind --eslint --app --no-src-dir --import-alias \"@/*\" --use-npm --yes 2>&1)",
+      "Bash(cd \"H:/Xecuit Website 2026\" && npx create-next-app@latest xecuit-web --typescript --tailwind --eslint --app --no-src-dir --import-alias \"@/*\" --use-npm --yes 2>&1)",
+      "Bash(cd \"H:/Xecuit Website 2026\" && npm run build 2>&1)",
+      "Bash(cd \"H:/Xecuit Website 2026\" && npm run build)",
+      "Bash(cd \"H:/Xecuit Website 2026\" && npm run lint)",
+      "Bash(cd \"H:/Xecuit Website 2026\" && npx vercel --version 2>&1 || echo \"Not installed\")",
+      "Bash(cd \"H:/Xecuit Website 2026\" && npx vercel whoami 2>&1)",
+      "Bash(cd \"H:/Xecuit Website 2026\" && npx vercel login)",
+      "Bash(cd \"H:/Xecuit Website 2026\" && npm run dev)",
+      "Bash(cd \"H:/Xecuit Website 2026\" && node -e \"\nconst fs = require\\('fs'\\);\nconst html = fs.readFileSync\\('S:/Downloads/Contact Inquiry System — Institutional Alignment.html', 'utf8'\\);\n\n// Find the body start and end\nconst bodyStart = html.indexOf\\('<body'\\);\nconst bodyEnd = html.indexOf\\('</body>', bodyStart\\);\n\nif \\(bodyStart !== -1 && bodyEnd !== -1\\) {\n  // Find the closing > of the body tag\n  const bodyTagEnd = html.indexOf\\('>', bodyStart\\);\n  const bodyContent = html.substring\\(bodyTagEnd + 1, bodyEnd\\);\n  \n  fs.writeFileSync\\('public/superdesign-body.html', bodyContent\\);\n  console.log\\('Extracted body content, length:', bodyContent.length\\);\n} else {\n  console.log\\('Could not find body tags'\\);\n}\n\")",
+      "Bash(taskkill /PID 90924 /F 2>&1)",
+      "Bash(cd \"H:/Xecuit Website 2026\" && cmd.exe /c \"taskkill /PID 90924 /F\" 2>&1)",
+      "Bash(cd \"H:/Xecuit Website 2026\" && netstat -ano | grep :3000 | head -1 || echo \"Port 3000 is free\")",
+      "Bash(cd \"H:/Xecuit Website 2026\" && cp public/article-scripts.js public/article-data.js && head -5 public/article-data.js && echo \"...\" && tail -5 public/article-data.js)",
+      "Bash(cd \"H:/Xecuit Website 2026\" && powershell -Command \"Get-Process | Where-Object { $_.ProcessName -eq 'node' -and $_.MainWindowTitle -like '*next*' } | Stop-Process -Force\" 2>&1 || echo \"Process stopped\")",
+      "Bash(powershell -Command \"Stop-Process -Id 84652 -Force\" 2>&1 || echo \"Done\")",
+      "Bash(cd \"H:/Xecuit Website 2026\" && sleep 2 && npm run dev)",
+      "Bash(powershell -Command \"Stop-Process -Id 84652 -Force -ErrorAction SilentlyContinue; Start-Sleep -Seconds 2; Get-Process | Where-Object { $_.Id -eq 84652 }\" 2>&1)",
+      "Bash(cd \"H:/Xecuit Website 2026\" && node -e \"\nconst fs = require\\('fs'\\);\nconst html = fs.readFileSync\\('public/superdesign-body.html', 'utf8'\\);\n\n// Find article-modal div\nconst modalStart = html.indexOf\\('id=\\\\\"article-modal\\\\\"'\\);\nif \\(modalStart !== -1\\) {\n  // Get 500 chars after modal start\n  console.log\\(html.substring\\(modalStart - 50, modalStart + 500\\)\\);\n}\n\")",
+      "Bash(cd \"H:/Xecuit Website 2026\" && node -e \"\nconst fs = require\\('fs'\\);\nconst html = fs.readFileSync\\('public/superdesign-body.html', 'utf8'\\);\n\n// Find the full article-modal div\nconst modalStart = html.indexOf\\('id=\\\\\"article-modal\\\\\"'\\);\nconst modalEnd = html.indexOf\\('</div></div>', modalStart\\);\n\nif \\(modalStart !== -1\\) {\n  // Find the opening div tag\n  const divStart = html.lastIndexOf\\('<div', modalStart\\);\n  console.log\\(html.substring\\(divStart, modalEnd + 200\\)\\);\n}\n\")",
+      "Bash(cd \"H:/Xecuit Website 2026\" && node -e \"\nconst fs = require\\('fs'\\);\nconst data = fs.readFileSync\\('public/article-data.js', 'utf8'\\);\n\n// Find and remove the Initiate Dialogue button from careers section\nconst careersStart = data.indexOf\\(\\\\\"'careers':\\\\\"\\);\nif \\(careersStart !== -1\\) {\n  // Find the specific button in careers section\n  const btnPattern = /<div class=\\\\\"w-full py-5 bg-\\\\\\\\[\\\\\\\\#264C3F\\\\\\\\] text-\\\\\\\\[\\\\\\\\#E2DBCF\\\\\\\\] text-\\\\\\\\[10px\\\\\\\\] uppercase font-bold tracking-\\\\\\\\[0\\\\\\\\.3em\\\\\\\\] rounded-full[^>]*>Initiate Dialogue<\\\\\\\\/button>[^<]*<\\\\\\\\/div>[^<]*<\\\\\\\\/div>[^<]*<\\\\\\\\/div>[^<]*<\\\\\\\\/section>/g;\n  \n  // Simpler: find the specific button and remove it\n  const careersSection = data.substring\\(careersStart\\);\n  const btnStart = careersSection.indexOf\\('<button onclick=\\\\\"openContact\\(\\)\\\\\" class=\\\\\"w-full py-5 bg-[#264C3F]'\\);\n  \n  if \\(btnStart !== -1\\) {\n    const btnEnd = careersSection.indexOf\\('</button>', btnStart\\);\n    const afterBtn = careersSection.indexOf\\('</section>', btnEnd\\);\n    \n    // Remove the button and its wrapper divs\n    const beforeBtn = careersSection.substring\\(0, careersSection.lastIndexOf\\('<div', btnStart\\)\\);\n    const afterBtnSection = careersSection.substring\\(afterBtn + 10\\);\n    \n    const newCareers = beforeBtn + afterBtnSection;\n    \n    const newData = data.substring\\(0, careersStart\\) + newCareers;\n    fs.writeFileSync\\('public/article-data.js', newData\\);\n    console.log\\('Removed Initiate Dialogue button from careers'\\);\n  }\n}\n\")",
+      "Bash(powershell -Command \"Stop-Process -Id 75128 -Force -ErrorAction SilentlyContinue\" 2>&1 && sleep 2 && cd \"H:/Xecuit Website 2026\" && npm run dev)",
+      "Bash(cd \"H:/Xecuit Website 2026\" && node -e \"\nconst fs = require\\('fs'\\);\nconst html = fs.readFileSync\\('public/superdesign-body.html', 'utf8'\\);\n\n// Find the partners section\nconst partnersStart = html.indexOf\\('id=\\\\\"partners\\\\\"'\\);\nif \\(partnersStart !== -1\\) {\n  // Find the 3 partner cards\n  const cardsStart = html.indexOf\\('Founders & Sellers', partnersStart\\);\n  \n  // Get a chunk of the partners section with the 3 cards\n  console.log\\(html.substring\\(cardsStart - 200, cardsStart + 1000\\)\\);\n}\n\")",
+      "Bash(cd \"H:/Xecuit Website 2026\" && node -e \"\nconst fs = require\\('fs'\\);\nconst html = fs.readFileSync\\('public/superdesign-body.html', 'utf8'\\);\n\n// Verify the changes\nconst partnersIdx = html.indexOf\\('id=\\\\\\\\\\\\\"partners\\\\\\\\\\\\\"'\\);\nconst gridIdx = html.indexOf\\('grid md:grid-cols-2 lg:grid-cols-3', partnersIdx\\);\n\nif \\(partnersIdx !== -1 && gridIdx !== -1\\) {\n  const sectionEnd = html.indexOf\\('</section>', gridIdx\\);\n  const partnersContent = html.substring\\(gridIdx, sectionEnd\\);\n  \n  // Check current background colors\n  const bgColors = partnersContent.match\\(/bg-\\\\\\\\[#\\\\\\\\w+\\\\\\\\]/g\\);\n  console.log\\('Updated background colors:', [...new Set\\(bgColors\\)]\\);\n  \n  // Show a sample of the first card\n  const firstCardStart = partnersContent.indexOf\\('<div'\\);\n  const firstCardEnd = partnersContent.indexOf\\('</div>', firstCardStart + 200\\);\n  console.log\\('\\\\\\\\nFirst card preview:'\\);\n  console.log\\(partnersContent.substring\\(firstCardStart, firstCardEnd + 200\\)\\);\n}\n\")",
+      "Bash(cd \"H:/Xecuit Website 2026\" && node check-colors.js)",
+      "Bash(cd \"H:/Xecuit Website 2026\" && node fix-colors.js)",
+      "Bash(cd \"H:/Xecuit Website 2026\" && rm check-colors.js fix-colors.js && npm run build 2>&1)",
+      "Bash(powershell -Command \"Stop-Process -Id 61356 -Force\" && sleep 3 && cd \"H:/Xecuit Website 2026\" && npm run dev)",
+      "Bash(cd \"H:/Xecuit Website 2026\" && node fix-arrows.js && rm fix-arrows.js)",
+      "Bash(cd \"H:/Xecuit Website 2026\" && npm run build 2>&1 && npm run dev)",
+      "Bash(powershell -Command \"Stop-Process -Id 97928 -Force\" && sleep 3 && cd \"H:/Xecuit Website 2026\" && npm run dev)"
+    ]
+  }
+}
