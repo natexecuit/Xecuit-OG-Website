@@ -352,20 +352,6 @@ const articleData = {
                             <p>We are a small, focused team by design. We value individuals who can think independently, operate with precision, and contribute to systems that extend beyond any single role or transaction. If you are interested in building alongside us, we welcome conversations.</p>
                         </section>
 
-                        <section class="space-y-8">
-                            <h3 class="text-2xl md:text-3xl font-serif text-[#9E8461]">Open Roles</h3>
-                            <div class="grid gap-10">
-                                <div class="space-y-4">
-                                    <h4 class="text-xl font-serif text-[#264C3F]">Portfolio Manager</h4>
-                                    <p>The Portfolio Manager is responsible for overseeing the performance and integration of businesses within the Xecuit ecosystem. This role sits at the intersection of investment, operations, and strategy, ensuring that each asset contributes to and benefits from the broader system.</p>
-                                </div>
-                                <div class="space-y-4">
-                                    <h4 class="text-xl font-serif text-[#264C3F]">Economic Researcher / Historian</h4>
-                                    <p>This role is focused on building a structured understanding of economic cycles, historical market behavior, and long-term patterns that inform Xecuit's portfolio construction and hedging approach. The objective is to develop a continuously evolving knowledge base that strengthens decision-making across cycles.</p>
-                                </div>
-                            </div>
-                        </section>
-
                         <section class="space-y-6">
                             <h3 class="text-2xl md:text-3xl font-serif text-[#9E8461]">How We Work</h3>
                             <p>We operate with a small, high-trust team and a focus on output over process. There is no separation between thinking and doing. Each role is expected to contribute to the system as a whole, not just a defined function.</p>
@@ -377,12 +363,67 @@ const articleData = {
                             </ul>
                         </section>
 
-                        
+                        <section class="space-y-8 pt-12 border-t border-[#264C3F]/10">
+                            <h3 class="text-2xl md:text-3xl font-serif text-[#9E8461]">Open Roles</h3>
+                            <p class="text-[#264C3F]/70">We are actively seeking exceptional talent for the following positions. To inquire about an open role or submit your resume, please email <a href="mailto:careers@xecuit.com" class="text-[#9E8461] hover:underline font-medium">careers@xecuit.com</a>.</p>
 
-                        <section class="space-y-8">
-                            <h3 class="text-2xl md:text-3xl font-serif text-[#264C3F] flex items-center gap-4"><span class="text-[#9E8461]">2.</span> Information We Collect</h3>
+                            <div class="grid md:grid-cols-2 gap-8">
+                                <div class="bg-[#C7D1C2]/30 border border-[#264C3F]/10 rounded-2xl p-8 hover:border-[#9E8461]/30 transition-all">
+                                    <h4 class="text-xl font-serif text-[#264C3F] mb-4 pb-4 border-b border-[#264C3F]/10">Portfolio Manager</h4>
+                                    <p class="text-[#264C3F]/70 leading-relaxed mb-6">The Portfolio Manager is responsible for overseeing the performance and integration of businesses within the Xecuit ecosystem. This role sits at the intersection of investment, operations, and strategy, ensuring that each asset contributes to and benefits from the broader system.</p>
+                                    <a href="mailto:careers@xecuit.com?subject=Portfolio Manager Inquiry" class="inline-flex items-center gap-2 text-[#9E8461] hover:text-[#264C3F] transition-colors text-sm font-bold uppercase tracking-widest">
+                                        Inquire about this role
+                                        <iconify-icon icon="lucide:arrow-right" class="text-lg"></iconify-icon>
+                                    </a>
+                                </div>
+
+                                <div class="bg-[#C7D1C2]/30 border border-[#264C3F]/10 rounded-2xl p-8 hover:border-[#9E8461]/30 transition-all">
+                                    <h4 class="text-xl font-serif text-[#264C3F] mb-4 pb-4 border-b border-[#264C3F]/10">Economic Researcher / Historian</h4>
+                                    <p class="text-[#264C3F]/70 leading-relaxed mb-6">This role is focused on building a structured understanding of economic cycles, historical market behavior, and long-term patterns that inform Xecuit's portfolio construction and hedging approach. The objective is to develop a continuously evolving knowledge base that strengthens decision-making across cycles.</p>
+                                    <a href="mailto:careers@xecuit.com?subject=Economic Researcher Inquiry" class="inline-flex items-center gap-2 text-[#9E8461] hover:text-[#264C3F] transition-colors text-sm font-bold uppercase tracking-widest">
+                                        Inquire about this role
+                                        <iconify-icon icon="lucide:arrow-right" class="text-lg"></iconify-icon>
+                                    </a>
+                                </div>
+                            </div>
+                        </section>
+
+                        <section class="mt-12 p-8 bg-[#264C3F]/5 rounded-2xl border border-[#9E8461]/20">
+                            <h4 class="text-lg font-serif text-[#264C3F] mb-4">Interested in Joining Xecuit?</h4>
+                            <p class="text-[#264C3F]/70 mb-4">We welcome conversations with exceptional individuals who align with our approach to long-duration value creation.</p>
+                            <p class="text-[#264C3F]/70">Please send your resume and a brief note about your background to:</p>
+                            <a href="mailto:careers@xecuit.com" class="inline-flex items-center gap-3 mt-4 text-[#9E8461] hover:text-[#264C3F] transition-colors font-bold">
+                                <iconify-icon icon="lucide:mail" class="text-xl"></iconify-icon>
+                                careers@xecuit.com
+                            </a>
+                        </section>
+                    </div>
+                </div>
+            `
+        },
+        'privacy': {
+            title: 'Privacy Policy',
+            category: 'Legal',
+            date: 'Last Updated January 1, 2026',
+            readTime: '5 min read',
+            image: 'https://vgbujcuwptvheqijyjbe.supabase.co/storage/v1/object/public/hmac-uploads/uploads/91674c7c-9744-4574-9bfd-0371e88f8f51/1769154449658-106efb31/ivan-bandura-vHsh8PtJ0jk-unsplash.jpg',
+            content: `
+                <div class="max-w-4xl mx-auto">
+                    <div class="mb-12 border-b border-[#264C3F]/10 pb-12">
+                        <div class="flex items-center gap-4 mb-8">
+                            <span class="px-3 py-1 border border-[#9E8461]/30 text-[#9E8461] text-[10px] uppercase font-bold tracking-widest rounded-sm">Legal</span>
+                            <span class="text-[#264C3F]/40 text-[10px] uppercase font-bold tracking-widest">Last Updated January 1, 2026</span>
+                        </div>
+                        <h2 class="text-4xl md:text-7xl font-serif text-[#264C3F] leading-tight mb-6">Privacy Policy</h2>
+                        <p class="text-xl md:text-2xl font-serif italic text-[#9E8461]">Xecuit Holdings LLC is committed to protecting your privacy. This policy explains how we collect, use, and safeguard information.</p>
+                    </div>
+                    <div class="prose prose-lg text-[#264C3F] max-w-none space-y-12 font-light leading-relaxed">
+                        <p>This Privacy Policy describes how Xecuit Holdings LLC ("Xecuit," "we," "our," or "us") collects, uses, and protects information obtained through this website and related services. By accessing or using this Site, you agree to the terms of this policy.</p>
+
+                        <section class="space-y-6">
+                            <h3 class="text-2xl md:text-3xl font-serif text-[#264C3F] flex items-center gap-4"><span class="text-[#9E8461]">1.</span> Information We Collect</h3>
                             <p>We collect information necessary to evaluate opportunities, maintain relationships, and operate our business effectively.</p>
-                            
+
                             <div class="space-y-4">
                                 <h4 class="text-sm uppercase font-bold tracking-widest text-[#9E8461]">Information You Provide</h4>
                                 <ul class="space-y-3">
@@ -408,7 +449,7 @@ const articleData = {
                         </section>
 
                         <section class="space-y-6">
-                            <h3 class="text-2xl md:text-3xl font-serif text-[#264C3F] flex items-center gap-4"><span class="text-[#9E8461]">3.</span> Confidentiality and Sensitive Information</h3>
+                            <h3 class="text-2xl md:text-3xl font-serif text-[#264C3F] flex items-center gap-4"><span class="text-[#9E8461]">2.</span> Confidentiality and Sensitive Information</h3>
                             <p>Xecuit regularly engages with confidential and proprietary information, including non-public financial data and transaction materials. We treat such information with strict confidentiality and implement appropriate safeguards, including:</p>
                             <ul class="space-y-3">
                                 <li class="flex gap-4 items-start"><div class="w-1.5 h-6 bg-[#9E8461] shrink-0 mt-1"></div><span>Controlled access to sensitive materials</span></li>
@@ -420,7 +461,7 @@ const articleData = {
                         </section>
 
                         <section class="space-y-6">
-                            <h3 class="text-2xl md:text-3xl font-serif text-[#264C3F] flex items-center gap-4"><span class="text-[#9E8461]">4.</span> How We Use Information</h3>
+                            <h3 class="text-2xl md:text-3xl font-serif text-[#264C3F] flex items-center gap-4"><span class="text-[#9E8461]">3.</span> How We Use Information</h3>
                             <p>We use collected information for legitimate business purposes, including:</p>
                             <ul class="space-y-3">
                                 <li class="flex gap-4 items-start"><div class="w-1.5 h-6 bg-[#9E8461] shrink-0 mt-1"></div><span>Evaluating acquisition opportunities and investment prospects</span></li>
@@ -434,7 +475,7 @@ const articleData = {
                         </section>
 
                         <section class="space-y-8">
-                            <h3 class="text-2xl md:text-3xl font-serif text-[#264C3F] flex items-center gap-4"><span class="text-[#9E8461]">5.</span> Information Sharing and Disclosure</h3>
+                            <h3 class="text-2xl md:text-3xl font-serif text-[#264C3F] flex items-center gap-4"><span class="text-[#9E8461]">4.</span> Information Sharing and Disclosure</h3>
                             <p>We may share information under the following circumstances:</p>
 
                             <div class="space-y-4">
@@ -459,12 +500,12 @@ const articleData = {
                         </section>
 
                         <section class="space-y-6">
-                            <h3 class="text-2xl md:text-3xl font-serif text-[#264C3F] flex items-center gap-4"><span class="text-[#9E8461]">6.</span> Data Security</h3>
+                            <h3 class="text-2xl md:text-3xl font-serif text-[#264C3F] flex items-center gap-4"><span class="text-[#9E8461]">5.</span> Data Security</h3>
                             <p>We implement reasonable administrative, technical, and organizational safeguards designed to protect information from unauthorized access, disclosure, alteration, or destruction. While no system can guarantee absolute security, we maintain practices aligned with institutional standards for data protection.</p>
                         </section>
 
                         <section class="space-y-6">
-                            <h3 class="text-2xl md:text-3xl font-serif text-[#264C3F] flex items-center gap-4"><span class="text-[#9E8461]">7.</span> Data Retention</h3>
+                            <h3 class="text-2xl md:text-3xl font-serif text-[#264C3F] flex items-center gap-4"><span class="text-[#9E8461]">6.</span> Data Retention</h3>
                             <p>We retain information only for as long as necessary to fulfill the purposes outlined in this policy, including:</p>
                             <ul class="space-y-3">
                                 <li class="flex gap-4 items-start"><div class="w-1.5 h-6 bg-[#9E8461] shrink-0 mt-1"></div><span>Ongoing business relationships</span></li>
@@ -475,7 +516,7 @@ const articleData = {
                         </section>
 
                         <section class="space-y-6">
-                            <h3 class="text-2xl md:text-3xl font-serif text-[#264C3F] flex items-center gap-4"><span class="text-[#9E8461]">8.</span> Cookies and Tracking Technologies</h3>
+                            <h3 class="text-2xl md:text-3xl font-serif text-[#264C3F] flex items-center gap-4"><span class="text-[#9E8461]">7.</span> Cookies and Tracking Technologies</h3>
                             <p>Our website may use cookies and similar technologies to:</p>
                             <ul class="space-y-3">
                                 <li class="flex gap-4 items-start"><div class="w-1.5 h-6 bg-[#9E8461] shrink-0 mt-1"></div><span>Enhance user experience</span></li>
@@ -486,12 +527,12 @@ const articleData = {
                         </section>
 
                         <section class="space-y-6">
-                            <h3 class="text-2xl md:text-3xl font-serif text-[#264C3F] flex items-center gap-4"><span class="text-[#9E8461]">9.</span> Third-Party Links</h3>
+                            <h3 class="text-2xl md:text-3xl font-serif text-[#264C3F] flex items-center gap-4"><span class="text-[#9E8461]">8.</span> Third-Party Links</h3>
                             <p>Our website may contain links to third-party websites or services. Xecuit is not responsible for the privacy practices or content of those third parties. Users are encouraged to review their respective privacy policies.</p>
                         </section>
 
                         <section class="space-y-6">
-                            <h3 class="text-2xl md:text-3xl font-serif text-[#264C3F] flex items-center gap-4"><span class="text-[#9E8461]">10.</span> Your Rights and Choices</h3>
+                            <h3 class="text-2xl md:text-3xl font-serif text-[#264C3F] flex items-center gap-4"><span class="text-[#9E8461]">9.</span> Your Rights and Choices</h3>
                             <p>Depending on applicable law, individuals may have rights regarding their personal information, including:</p>
                             <ul class="space-y-3">
                                 <li class="flex gap-4 items-start"><div class="w-1.5 h-6 bg-[#9E8461] shrink-0 mt-1"></div><span>Access to information we hold</span></li>
@@ -502,17 +543,17 @@ const articleData = {
                         </section>
 
                         <section class="space-y-6">
-                            <h3 class="text-2xl md:text-3xl font-serif text-[#264C3F] flex items-center gap-4"><span class="text-[#9E8461]">11.</span> International Considerations</h3>
+                            <h3 class="text-2xl md:text-3xl font-serif text-[#264C3F] flex items-center gap-4"><span class="text-[#9E8461]">10.</span> International Considerations</h3>
                             <p>Xecuit operates primarily within the United States. If information is transferred across jurisdictions, we take reasonable steps to ensure it is handled in accordance with applicable legal and regulatory standards.</p>
                         </section>
 
                         <section class="space-y-6">
-                            <h3 class="text-2xl md:text-3xl font-serif text-[#264C3F] flex items-center gap-4"><span class="text-[#9E8461]">12.</span> Changes to This Policy</h3>
-                            <p>We may update this Privacy Policy periodically to reflect changes in our practices or legal requirements. Updates will be posted on this page with a revised &ldquo;Last Updated&rdquo; date.</p>
+                            <h3 class="text-2xl md:text-3xl font-serif text-[#264C3F] flex items-center gap-4"><span class="text-[#9E8461]">11.</span> Changes to This Policy</h3>
+                            <p>We may update this Privacy Policy periodically to reflect changes in our practices or legal requirements. Updates will be posted on this page with a revised "Last Updated" date.</p>
                         </section>
 
                         <section class="space-y-6 pt-12 border-t border-[#264C3F]/10">
-                            <h3 class="text-2xl md:text-3xl font-serif text-[#264C3F] flex items-center gap-4"><span class="text-[#9E8461]">13.</span> Contact Information</h3>
+                            <h3 class="text-2xl md:text-3xl font-serif text-[#264C3F] flex items-center gap-4"><span class="text-[#9E8461]">12.</span> Contact Information</h3>
                             <p>For questions regarding this Privacy Policy or our data practices, please contact:</p>
                             <div class="space-y-1">
                                 <p class="font-bold">Xecuit Holdings LLC</p>
