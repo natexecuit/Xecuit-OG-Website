@@ -1,23 +1,31 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import fs from 'fs';
-import path from 'path';
-
-// Read article data at build time for server component
-// But for client component, we'll fetch it
 
 export default function Home() {
   const [bodyContent, setBodyContent] = useState("");
+  const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
     // Load the body content
     const loadContent = async () => {
       try {
+        setIsLoading(true);
         const [bodyHtml, articleJs] = await Promise.all([
-          fetch('/superdesign-body.html').then(res => res.text()),
-          fetch('/article-data.js').then(res => res.text())
+          fetch('/superdesign-body.html').then(res => {
+            if (!res.ok) throw new Error(`Failed to fetch HTML: ${res.status}`);
+            return res.text();
+          }),
+          fetch('/article-data.js').then(res => {
+            if (!res.ok) throw new Error(`Failed to fetch JS: ${res.status}`);
+            return res.text();
+          })
         ]);
+
+        if (!bodyHtml || bodyHtml.trim().length === 0) {
+          throw new Error('Received empty HTML content');
+        }
 
         setBodyContent(bodyHtml);
 
@@ -155,12 +163,15 @@ export default function Home() {
           window.openArticle = openArticle;
           window.closeArticle = closeArticle;
 
-          console.log('Xecuit: Scripts loaded, articleData keys:', typeof articleData !== 'undefined' ? Object.keys(articleData) : 'undefined');
+          console.log('Xecuit: Scripts loaded successfully');
         `;
         document.head.appendChild(functionScript);
 
+        setIsLoading(false);
       } catch (err) {
         console.error('Error loading content:', err);
+        setError(err instanceof Error ? err.message : 'Failed to load content');
+        setIsLoading(false);
       }
     };
 
@@ -181,11 +192,31 @@ export default function Home() {
       <script
         src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"
       />
+      {/* Loading state */}
+      {isLoading && (
+        <div className="min-h-screen flex items-center justify-center bg-[#E2DBCF]">
+          <div className="text-center">
+            <div className="inline-block animate-spin rounded-full h-12 w-12 border-b-2 border-[#264C3F] mb-4"></div>
+            <p className="text-[#264C3F] font-medium">Loading...</p>
+          </div>
+        </div>
+      )}
+      {/* Error state */}
+      {error && (
+        <div className="min-h-screen flex items-center justify-center bg-[#E2DBCF]">
+          <div className="text-center max-w-md px-4">
+            <p className="text-red-600 mb-4">Error: {error}</p>
+            <p className="text-[#264C3F]">Please refresh the page to try again.</p>
+          </div>
+        </div>
+      )}
       {/* Original Superdesign body content */}
-      <div
-        dangerouslySetInnerHTML={{ __html: bodyContent }}
-        className="min-h-screen"
-      />
+      {!isLoading && !error && bodyContent && (
+        <div
+          dangerouslySetInnerHTML={{ __html: bodyContent }}
+          className="min-h-screen"
+        />
+      )}
     </>
   );
 }
