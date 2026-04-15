@@ -58,6 +58,51 @@ export default function Home() {
             }
           }
 
+          // Contact form submission handler
+          async function handleContactSubmit(event) {
+            event.preventDefault();
+            const form = event.target;
+            const submitBtn = form.querySelector('#contact-submit-btn');
+            const originalText = submitBtn.textContent;
+
+            // Collect form data
+            const formData = {
+              name: form.name.value,
+              email: form.email.value,
+              company: form.company.value,
+              inquiry: form.inquiry.value
+            };
+
+            try {
+              // Show loading state
+              submitBtn.textContent = 'Sending...';
+              submitBtn.disabled = true;
+
+              // Submit to API
+              const response = await fetch('/api/contact', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(formData)
+              });
+
+              const data = await response.json();
+
+              if (response.ok) {
+                alert('Inquiry sent. We will be in touch.');
+                form.reset();
+                closeContact();
+              } else {
+                alert(data.error || 'Failed to send inquiry. Please try again.');
+              }
+            } catch (error) {
+              console.error('Form submission error:', error);
+              alert('Failed to send inquiry. Please try again.');
+            } finally {
+              submitBtn.textContent = originalText;
+              submitBtn.disabled = false;
+            }
+          }
+
           // Article modal functions
           function openArticle(articleId) {
             const modal = document.getElementById('article-modal');
@@ -165,51 +210,7 @@ export default function Home() {
           window.closeContact = closeContact;
           window.openArticle = openArticle;
           window.closeArticle = closeArticle;
-
-          // Contact form submission
-          document.getElementById('contact-form')?.addEventListener('submit', async function(e) {
-            e.preventDefault();
-            const form = e.target;
-            const submitBtn = form.querySelector('#contact-submit-btn');
-            const originalText = submitBtn.textContent;
-
-            // Collect form data
-            const formData = {
-              name: form.name.value,
-              email: form.email.value,
-              company: form.company.value,
-              inquiry: form.message.value
-            };
-
-            try {
-              // Show loading state
-              submitBtn.textContent = 'Sending...';
-              submitBtn.disabled = true;
-
-              // Submit to API
-              const response = await fetch('/api/contact', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(formData)
-              });
-
-              const data = await response.json();
-
-              if (response.ok) {
-                alert('Inquiry sent. We will be in touch.');
-                form.reset();
-                closeContact();
-              } else {
-                alert(data.error || 'Failed to send inquiry. Please try again.');
-              }
-            } catch (error) {
-              console.error('Form submission error:', error);
-              alert('Failed to send inquiry. Please try again.');
-            } finally {
-              submitBtn.textContent = originalText;
-              submitBtn.disabled = false;
-            }
-          });
+          window.handleContactSubmit = handleContactSubmit;
 
           console.log('Xecuit: Scripts loaded successfully');
         `;

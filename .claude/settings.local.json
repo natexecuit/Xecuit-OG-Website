@@ -55,7 +55,8 @@
       "mcp__plugin_playwright_playwright__browser_fill_form",
       "mcp__plugin_playwright_playwright__browser_handle_dialog",
       "mcp__plugin_playwright_playwright__browser_network_requests",
-      "mcp__plugin_playwright_playwright__browser_console_messages"
+      "mcp__plugin_playwright_playwright__browser_console_messages",
+      "Bash(echo \"Waiting 40 seconds for Vercel deployment...\" && sleep 40 && curl -s -I https://xecuit.com 2>&1 | head -5)"
     ]
   }
 }
