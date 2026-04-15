@@ -41,7 +41,7 @@ export async function POST(request: NextRequest) {
     if (resend) {
       try {
         const { data, error } = await resend.emails.send({
-          from: 'Xecuit Website <onboarding@resend.dev>',
+          from: 'Xecuit Website <contact@xecuit.com>',
           to: 'engage@xecuit.com',
           replyTo: email,
           subject: `New Inquiry from ${name}${company ? ` at ${company}` : ''}`,
