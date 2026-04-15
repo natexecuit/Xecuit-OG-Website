@@ -49,7 +49,13 @@
       "Bash(curl -s https://xecuit.com | head -20)",
       "Bash(curl -s https://xecuit.com 2>&1)",
       "Bash(curl -s https://xecuit.com/superdesign-body.html 2>&1 | head -10)",
-      "Bash(curl -s https://xecuit.com/article-data.js 2>&1 | head -5)"
+      "Bash(curl -s https://xecuit.com/article-data.js 2>&1 | head -5)",
+      "Bash(echo \"Waiting 30 seconds for Vercel deployment...\" && sleep 30 && curl -s -I https://xecuit.com 2>&1 | head -10)",
+      "Bash(echo \"Waiting 40 seconds for Vercel deployment...\" && sleep 40 && curl -s -I https://xecuit.com 2>&1 | head -10)",
+      "mcp__plugin_playwright_playwright__browser_fill_form",
+      "mcp__plugin_playwright_playwright__browser_handle_dialog",
+      "mcp__plugin_playwright_playwright__browser_network_requests",
+      "mcp__plugin_playwright_playwright__browser_console_messages"
     ]
   }
 }
