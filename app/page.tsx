@@ -2,6 +2,9 @@
 
 import { useEffect, useState } from "react";
 
+// Force dynamic rendering to prevent static generation of empty content
+export const dynamic = 'force-dynamic';
+
 export default function Home() {
   const [bodyContent, setBodyContent] = useState("");
   const [isLoading, setIsLoading] = useState(true);
@@ -192,12 +195,12 @@ export default function Home() {
       <script
         src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"
       />
-      {/* Loading state */}
-      {isLoading && (
+      {/* Loading state - shown by default and during client-side loading */}
+      {(isLoading || typeof window === 'undefined') && (
         <div className="min-h-screen flex items-center justify-center bg-[#E2DBCF]">
           <div className="text-center">
             <div className="inline-block animate-spin rounded-full h-12 w-12 border-b-2 border-[#264C3F] mb-4"></div>
-            <p className="text-[#264C3F] font-medium">Loading...</p>
+            <p className="text-[#264C3F] font-medium">Loading Xecuit...</p>
           </div>
         </div>
       )}

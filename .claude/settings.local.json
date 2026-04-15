@@ -35,7 +35,21 @@
       "Bash(powershell -Command \"Stop-Process -Id 61356 -Force\" && sleep 3 && cd \"H:/Xecuit Website 2026\" && npm run dev)",
       "Bash(cd \"H:/Xecuit Website 2026\" && node fix-arrows.js && rm fix-arrows.js)",
       "Bash(cd \"H:/Xecuit Website 2026\" && npm run build 2>&1 && npm run dev)",
-      "Bash(powershell -Command \"Stop-Process -Id 97928 -Force\" && sleep 3 && cd \"H:/Xecuit Website 2026\" && npm run dev)"
+      "Bash(powershell -Command \"Stop-Process -Id 97928 -Force\" && sleep 3 && cd \"H:/Xecuit Website 2026\" && npm run dev)",
+      "Bash(cd \"H:/Xecuit Website 2026\" && npx vercel --version 2>&1)",
+      "Bash(cd \"H:/Xecuit Website 2026\" && npx vercel whoami 2>&1 || echo \"Not logged in\")",
+      "Bash(cd \"H:/Xecuit Website 2026\" && npx vercel --prod --yes 2>&1)",
+      "Bash(cd \"H:/Xecuit Website 2026\" && npx vercel --prod --yes --name xecuit-website 2>&1)",
+      "Bash(npx vercel:*)",
+      "Bash(cd \"H:/Xecuit Website 2026\" && rm -rf .vercel && npx vercel link brizy-project-4639977 --yes 2>&1)",
+      "Bash(cd \"H:/Xecuit Website 2026\" && rm -rf .vercel && npx vercel link --cwd . --scope natexecuits brizy-project-4639977 --yes 2>&1)",
+      "Bash(cd \"H:/Xecuit Website 2026\" && rm -rf .vercel && npx vercel --yes 2>&1 | head -30)",
+      "Bash(cd \"H:/Xecuit Website 2026\" && rm -rf .vercel && npx vercel --prod brizy-project-4639977 --yes 2>&1)",
+      "Bash(cd \"H:/Xecuit Website 2026\" && rm -rf .vercel && VERCEL_PROJECT_ID=brizy-project-4639977 npx vercel --prod --yes 2>&1)",
+      "Bash(curl -s https://xecuit.com | head -20)",
+      "Bash(curl -s https://xecuit.com 2>&1)",
+      "Bash(curl -s https://xecuit.com/superdesign-body.html 2>&1 | head -10)",
+      "Bash(curl -s https://xecuit.com/article-data.js 2>&1 | head -5)"
     ]
   }
 }
