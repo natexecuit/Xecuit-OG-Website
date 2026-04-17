@@ -565,10 +565,10 @@ const articleData = {
             `
         },
         'disclaimer': {
-            title: 'Legal Disclaimer & Terms of Access',
+            title: 'Legal Disclaimer',
             category: 'Institutional Disclosure',
             date: 'Last Updated January 1, 2026',
-            readTime: '15 min read',
+            readTime: '3 min read',
             image: 'https://vgbujcuwptvheqijyjbe.supabase.co/storage/v1/object/public/hmac-uploads/uploads/91674c7c-9744-4574-9bfd-0371e88f8f51/1769154449658-106efb31/ivan-bandura-vHsh8PtJ0jk-unsplash.jpg',
             content: `
                 <div class="max-w-4xl mx-auto">
@@ -577,99 +577,43 @@ const articleData = {
                             <span class="px-3 py-1 border border-[#9E8461]/30 text-[#9E8461] text-[10px] uppercase font-bold tracking-widest rounded-sm">Institutional Disclosure</span>
                             <span class="text-[#264C3F]/40 text-[10px] uppercase font-bold tracking-widest">Last Updated January 1, 2026</span>
                         </div>
-                        <h2 class="text-4xl md:text-7xl font-serif text-[#264C3F] leading-tight mb-6">Legal Disclaimer & Terms of Access</h2>
-                        <p class="text-xl md:text-2xl font-serif italic text-[#9E8461]">Informational Purposes Only. This website is operated by Xecuit Holdings LLC. By accessing or using this Site, you agree to be bound by these Terms of Access.</p>
+                        <h2 class="text-4xl md:text-7xl font-serif text-[#264C3F] leading-tight mb-6">Legal Disclaimer</h2>
+                        <p class="text-xl md:text-2xl font-serif italic text-[#9E8461]">Informational purposes only. No offer to sell securities. No investment advice provided.</p>
                     </div>
                     <div class="prose prose-lg text-[#264C3F] max-w-none space-y-12 font-light leading-relaxed">
-                        <p>This website (the "Site") is operated by Xecuit Holdings LLC ("Xecuit," "we," "our," or "us"). By accessing or using this Site, you agree to be bound by the following Legal Disclaimer and Terms of Access. If you do not agree, you should not access or use this Site.</p>
-
                         <section class="space-y-6">
-                            <h3 class="text-2xl md:text-3xl font-serif text-[#264C3F] flex items-center gap-4"><span class="text-[#9E8461]">1.</span> Informational Purposes Only</h3>
-                            <p>The content provided on this Site is for informational purposes only and is intended solely to provide general information regarding Xecuit, its strategy, and its areas of focus. Nothing on this Site constitutes:</p>
-                            <ul class="space-y-3">
-                                <li class="flex gap-4 items-start"><div class="w-1.5 h-6 bg-[#9E8461] shrink-0 mt-1"></div><span>An offer to sell or a solicitation of an offer to buy any securities or financial instruments</span></li>
-                                <li class="flex gap-4 items-start"><div class="w-1.5 h-6 bg-[#9E8461] shrink-0 mt-1"></div><span>Investment, legal, tax, or accounting advice</span></li>
-                                <li class="flex gap-4 items-start"><div class="w-1.5 h-6 bg-[#9E8461] shrink-0 mt-1"></div><span>A recommendation or endorsement of any transaction, strategy, or investment</span></li>
-                            </ul>
-                            <p>Any such offer or solicitation, if made, will be conducted only through formal offering materials and in compliance with applicable laws and regulations.</p>
+                            <h3 class="text-2xl md:text-3xl font-serif text-[#264C3F] flex items-center gap-4"><span class="text-[#9E8461]">1.</span> No Offer or Solicitation</h3>
+                            <p>Nothing on this website constitutes an offer to sell or a solicitation of an offer to buy any securities or financial instruments. Xecuit does not solicit investments from the general public and does not offer securities to retail investors. All content is for informational purposes only.</p>
+                            <p class="text-base text-[#264C3F]/60 italic">Xecuit Holdings LLC is an independent sponsor and permanent capital holding company. We are not a registered investment adviser, broker-dealer, or pooled investment vehicle. We do not provide investment advice and therefore are not required to register as an investment adviser.</p>
+                            <p>We work exclusively with institutional investors, accredited investors, and sophisticated business owners. Any formal transaction will be governed by executed written agreements.</p>
                         </section>
 
                         <section class="space-y-6">
-                            <h3 class="text-2xl md:text-3xl font-serif text-[#264C3F] flex items-center gap-4"><span class="text-[#9E8461]">2.</span> No Reliance</h3>
-                            <p>While Xecuit strives to present accurate and current information, we make no representations or warranties, express or implied, regarding the completeness, accuracy, or reliability of any content on this Site. Users should not rely on the information contained herein for making business, investment, or legal decisions. Any reliance is at your own risk.</p>
+                            <h3 class="text-2xl md:text-3xl font-serif text-[#264C3F] flex items-center gap-4"><span class="text-[#9E8461]">2.</span> No Advisory Relationship</h3>
+                            <p>Access to this website or communication with Xecuit does not create an advisory, fiduciary, or agency relationship. No investment banking or brokerage relationship is formed. Any formal relationship will be governed solely by executed written agreements that clearly define the scope of services, compensation, and respective obligations.</p>
                         </section>
 
                         <section class="space-y-6">
                             <h3 class="text-2xl md:text-3xl font-serif text-[#264C3F] flex items-center gap-4"><span class="text-[#9E8461]">3.</span> Forward-Looking Statements</h3>
-                            <p>This Site may contain forward-looking statements, including statements regarding strategy, growth, performance, and potential outcomes. These statements are inherently uncertain and subject to risks and assumptions that may cause actual results to differ materially. Xecuit undertakes no obligation to update or revise any forward-looking statements.</p>
+                            <p>This website may contain statements regarding strategy, growth, performance, and potential outcomes. These statements are inherently uncertain and subject to risks and assumptions that may cause actual results to differ materially. Xecuit undertakes no obligation to update or revise any forward-looking statements.</p>
                         </section>
 
                         <section class="space-y-6">
-                            <h3 class="text-2xl md:text-3xl font-serif text-[#264C3F] flex items-center gap-4"><span class="text-[#9E8461]">4.</span> No Formation of Relationship</h3>
-                            <p>Accessing this Site or contacting Xecuit through it does not create:</p>
-                            <ul class="space-y-3">
-                                <li class="flex gap-4 items-start"><div class="w-1.5 h-6 bg-[#9E8461] shrink-0 mt-1"></div><span>An advisory, fiduciary, or agency relationship</span></li>
-                                <li class="flex gap-4 items-start"><div class="w-1.5 h-6 bg-[#9E8461] shrink-0 mt-1"></div><span>An investment banking or brokerage relationship</span></li>
-                                <li class="flex gap-4 items-start"><div class="w-1.5 h-6 bg-[#9E8461] shrink-0 mt-1"></div><span>A partnership, joint venture, or similar relationship</span></li>
-                            </ul>
-                            <p>Any formal relationship with Xecuit will be governed solely by executed written agreements.</p>
-                        </section>
-
-                        <section class="space-y-6">
-                            <h3 class="text-2xl md:text-3xl font-serif text-[#264C3F] flex items-center gap-4"><span class="text-[#9E8461]">5.</span> Confidentiality Not Guaranteed</h3>
-                            <p>Information submitted through this Site, including via contact forms or email links, is not considered confidential or proprietary unless explicitly agreed in writing. Parties seeking to share sensitive or non-public information, including transaction materials, should do so only under appropriate confidentiality agreements.</p>
-                        </section>
-
-                        <section class="space-y-6">
-                            <h3 class="text-2xl md:text-3xl font-serif text-[#264C3F] flex items-center gap-4"><span class="text-[#9E8461]">6.</span> Intellectual Property</h3>
-                            <p>All content on this Site, including text, graphics, logos, and design elements, is the property of Xecuit or its licensors and is protected by applicable intellectual property laws. You may not reproduce, distribute, modify, or use any content from this Site without prior written consent from Xecuit.</p>
-                        </section>
-
-                        <section class="space-y-6">
-                            <h3 class="text-2xl md:text-3xl font-serif text-[#264C3F] flex items-center gap-4"><span class="text-[#9E8461]">7.</span> Third-Party Content and Links</h3>
-                            <p>This Site may contain references or links to third-party websites or materials. Xecuit does not control and is not responsible for the content, accuracy, or practices of such third parties. Inclusion of any third-party link does not imply endorsement.</p>
-                        </section>
-
-                        <section class="space-y-6">
-                            <h3 class="text-2xl md:text-3xl font-serif text-[#264C3F] flex items-center gap-4"><span class="text-[#9E8461]">8.</span> Limitation of Liability</h3>
-                            <p>To the fullest extent permitted by law, Xecuit shall not be liable for any direct, indirect, incidental, consequential, or special damages arising out of or related to:</p>
-                            <ul class="space-y-3">
-                                <li class="flex gap-4 items-start"><div class="w-1.5 h-6 bg-[#9E8461] shrink-0 mt-1"></div><span>Use of or inability to use this Site</span></li>
-                                <li class="flex gap-4 items-start"><div class="w-1.5 h-6 bg-[#9E8461] shrink-0 mt-1"></div><span>Reliance on any information provided on this Site</span></li>
-                                <li class="flex gap-4 items-start"><div class="w-1.5 h-6 bg-[#9E8461] shrink-0 mt-1"></div><span>Errors, omissions, or interruptions in content</span></li>
-                            </ul>
-                            <p>This limitation applies regardless of the legal theory asserted.</p>
-                        </section>
-
-                        <section class="space-y-6">
-                            <h3 class="text-2xl md:text-3xl font-serif text-[#264C3F] flex items-center gap-4"><span class="text-[#9E8461]">9.</span> Indemnification</h3>
-                            <p>By using this Site, you agree to indemnify and hold harmless Xecuit and its affiliates, members, officers, employees, and agents from any claims, liabilities, damages, or expenses arising from your use of the Site or violation of these terms.</p>
-                        </section>
-
-                        <section class="space-y-6">
-                            <h3 class="text-2xl md:text-3xl font-serif text-[#264C3F] flex items-center gap-4"><span class="text-[#9E8461]">10.</span> Compliance with Laws</h3>
-                            <p>Users are responsible for ensuring that their access to and use of this Site complies with all applicable laws and regulations in their jurisdiction.</p>
-                        </section>
-
-                        <section class="space-y-6">
-                            <h3 class="text-2xl md:text-3xl font-serif text-[#264C3F] flex items-center gap-4"><span class="text-[#9E8461]">11.</span> Modifications</h3>
-                            <p>Xecuit reserves the right to modify or update these Terms of Access at any time without prior notice. Continued use of the Site constitutes acceptance of any revised terms.</p>
-                        </section>
-
-                        <section class="space-y-6">
-                            <h3 class="text-2xl md:text-3xl font-serif text-[#264C3F] flex items-center gap-4"><span class="text-[#9E8461]">12.</span> Governing Law</h3>
-                            <p>These Terms shall be governed by and construed in accordance with the laws of the State of Wyoming, without regard to conflict of law principles.</p>
+                            <h3 class="text-2xl md:text-3xl font-serif text-[#264C3F] flex items-center gap-4"><span class="text-[#9E8461]">4.</span> No Reliance and Limitation of Liability</h3>
+                            <p>While Xecuit strives to present accurate and current information, we make no representations or warranties regarding completeness, accuracy, or reliability. Users should not rely on information contained herein for making business, investment, or legal decisions. Any reliance is at your own risk.</p>
+                            <p>To the fullest extent permitted by law, Xecuit shall not be liable for any damages arising out of or related to use of this website or reliance on any information provided.</p>
                         </section>
 
                         <section class="space-y-6 pt-12 border-t border-[#264C3F]/10">
-                            <h3 class="text-2xl md:text-3xl font-serif text-[#264C3F] flex items-center gap-4"><span class="text-[#9E8461]">13.</span> Contact Information</h3>
-                            <p>For questions regarding these Terms of Access, please contact:</p>
+                            <h3 class="text-2xl md:text-3xl font-serif text-[#264C3F] flex items-center gap-4"><span class="text-[#9E8461]">5.</span> Contact and Governing Law</h3>
+                            <p>For questions regarding this disclaimer, please contact:</p>
                             <div class="space-y-1">
                                 <p class="font-bold">Xecuit Holdings LLC</p>
                                 <p>Email: <a href="mailto:legal@xecuit.com" class="text-[#9E8461] hover:underline">legal@xecuit.com</a></p>
                             </div>
+                            <p class="mt-6">This disclaimer shall be governed by and construed in accordance with the laws of the State of Wyoming.</p>
                         </section>
-                        
+
                         <div class="pt-8 border-t border-[#264C3F]/10">
                             <p class="text-xs uppercase tracking-widest font-bold text-[#264C3F]/40">Last Updated: January 1, 2026</p>
                         </div>

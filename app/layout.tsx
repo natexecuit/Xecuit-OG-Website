@@ -11,8 +11,8 @@ const plusJakartaSans = Plus_Jakarta_Sans({
 
 export const metadata: Metadata = {
   title: {
-    default: "Xecuit — Evergreen Holding Company",
-    template: "%s | Xecuit",
+    default: "Xecuit Holdings | Cyclical Ecosystem Builders",
+    template: "%s | Xecuit Holdings",
   },
   description:
     "Xecuit is a boutique investment firm building ecosystems anchored by durable platforms.",
@@ -44,7 +44,7 @@ export const metadata: Metadata = {
     type: "website",
     locale: "en_US",
     url: "https://xecuit.com",
-    title: "Xecuit — Evergreen Holding Company",
+    title: "Xecuit Holdings | Cyclical Ecosystem Builders",
     description: "Xecuit is a boutique investment firm building ecosystems anchored by durable platforms.",
     siteName: "Xecuit",
     images: [
@@ -58,7 +58,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Xecuit — Evergreen Holding Company",
+    title: "Xecuit Holdings | Cyclical Ecosystem Builders",
     description: "Xecuit is a boutique investment firm building ecosystems anchored by durable platforms.",
     images: ["/og-image.png"],
     creator: "@xecuit",
