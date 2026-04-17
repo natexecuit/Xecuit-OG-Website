@@ -2,6 +2,7 @@
 
 import { useEffect } from "react";
 import Link from "next/link";
+import Icon from '@/app/components/Icon';
 
 export default function CareersPage() {
   useEffect(() => {
@@ -162,7 +163,7 @@ export default function CareersPage() {
             <div className="grid md:grid-cols-2 gap-8">
               {/* Value Pillar 1 */}
               <div className="p-10 border border-[#264C3F]/10 bg-[#C7D1C2]/20 rounded-2xl group hover:border-[#264C3F]/30 transition-all">
-                <iconify-icon icon="lucide:briefcase" className="text-3xl text-[#9E8461] mb-6"></iconify-icon>
+                <Icon icon="lucide:briefcase" className="text-3xl text-[#9E8461] mb-6" />
                 <h3 className="text-2xl font-serif text-[#264C3F] mb-4">One Career, Multiple Companies</h3>
                 <p className="text-[#264C3F]/70 leading-relaxed font-light">
                   Portfolio mobility across our ecosystem. Move between platform companies, operating roles, and strategic positions without leaving the firm.
@@ -171,7 +172,7 @@ export default function CareersPage() {
 
               {/* Value Pillar 2 */}
               <div className="p-10 border border-[#264C3F]/10 bg-[#C7D1C2]/20 rounded-2xl group hover:border-[#264C3F]/30 transition-all">
-                <iconify-icon icon="lucide:trending-up" className="text-3xl text-[#9E8461] mb-6"></iconify-icon>
+                <Icon icon="lucide:trending-up" className="text-3xl text-[#9E8461] mb-6" />
                 <h3 className="text-2xl font-serif text-[#264C3F] mb-4">Careers That Compound</h3>
                 <p className="text-[#264C3F]/70 leading-relaxed font-light">
                   Evergreen structure, not 5-year fund cycles. Build lasting value without exit-driven disruption or artificial career timelines.
@@ -180,7 +181,7 @@ export default function CareersPage() {
 
               {/* Value Pillar 3 */}
               <div className="p-10 border border-[#264C3F]/10 bg-[#C7D1C2]/20 rounded-2xl group hover:border-[#264C3F]/30 transition-all">
-                <iconify-icon icon="lucide:users" className="text-3xl text-[#9E8461] mb-6"></iconify-icon>
+                <Icon icon="lucide:users" className="text-3xl text-[#9E8461] mb-6" />
                 <h3 className="text-2xl font-serif text-[#264C3F] mb-4">Shape Our Future</h3>
                 <p className="text-[#264C3F]/70 leading-relaxed font-light">
                   Join now and help build the firm. Early team members define culture, processes, and the trajectory of Xecuit for years to come.
@@ -189,7 +190,7 @@ export default function CareersPage() {
 
               {/* Value Pillar 4 */}
               <div className="p-10 border border-[#264C3F]/10 bg-[#C7D1C2]/20 rounded-2xl group hover:border-[#264C3F]/30 transition-all">
-                <iconify-icon icon="lucide:layers" className="text-3xl text-[#9E8461] mb-6"></iconify-icon>
+                <Icon icon="lucide:layers" className="text-3xl text-[#9E8461] mb-6" />
                 <h3 className="text-2xl font-serif text-[#264C3F] mb-4">Operating + Investing</h3>
                 <p className="text-[#264C3F]/70 leading-relaxed font-light">
                   Best of both worlds. Deep operational engagement building businesses alongside strategic investment perspective and ecosystem thinking.
@@ -254,7 +255,7 @@ export default function CareersPage() {
             <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
               {/* Investment Professionals */}
               <div className="bg-[#34574b] p-8 rounded-xl flex flex-col h-full border border-[#f9f7f4]/30">
-                <iconify-icon icon="lucide:bar-chart-3" className="text-3xl text-[#9E8461] mb-6"></iconify-icon>
+                <Icon icon="lucide:bar-chart-3" className="text-3xl text-[#9E8461] mb-6" />
                 <h4 className="text-lg font-serif text-[#f9f7f4] mb-4">Investment Professionals</h4>
                 <p className="text-[#f9f7f4]/70 leading-relaxed font-light text-sm">
                   Underwriting, due diligence, and portfolio management across our ecosystem.
@@ -263,7 +264,7 @@ export default function CareersPage() {
 
               {/* Operating Partners */}
               <div className="bg-[#34574b] p-8 rounded-xl flex flex-col h-full border border-[#f9f7f4]/30">
-                <iconify-icon icon="lucide:settings" className="text-3xl text-[#9E8461] mb-6"></iconify-icon>
+                <Icon icon="lucide:settings" className="text-3xl text-[#9E8461] mb-6" />
                 <h4 className="text-lg font-serif text-[#f9f7f4] mb-4">Operating Partners</h4>
                 <p className="text-[#f9f7f4]/70 leading-relaxed font-light text-sm">
                   Leadership roles within portfolio companies driving operational excellence.
@@ -272,7 +273,7 @@ export default function CareersPage() {
 
               {/* Platform Builders */}
               <div className="bg-[#34574b] p-8 rounded-xl flex flex-col h-full border border-[#f9f7f4]/30">
-                <iconify-icon icon="lucide:code-2" className="text-3xl text-[#9E8461] mb-6"></iconify-icon>
+                <Icon icon="lucide:code-2" className="text-3xl text-[#9E8461] mb-6" />
                 <h4 className="text-lg font-serif text-[#f9f7f4] mb-4">Platform Builders</h4>
                 <p className="text-[#f9f7f4]/70 leading-relaxed font-light text-sm">
                   Technology, data science, and product development capabilities.
@@ -281,7 +282,7 @@ export default function CareersPage() {
 
               {/* Specialist Functions */}
               <div className="bg-[#34574b] p-8 rounded-xl flex flex-col h-full border border-[#f9f7f4]/30">
-                <iconify-icon icon="lucide:target" className="text-3xl text-[#9E8461] mb-6"></iconify-icon>
+                <Icon icon="lucide:target" className="text-3xl text-[#9E8461] mb-6" />
                 <h4 className="text-lg font-serif text-[#f9f7f4] mb-4">Specialist Functions</h4>
                 <p className="text-[#f9f7f4]/70 leading-relaxed font-light text-sm">
                   Finance, legal, marketing, and other critical support functions.
@@ -370,7 +371,7 @@ export default function CareersPage() {
 
             <div className="grid md:grid-cols-2 gap-8 mb-12">
               <div className="flex gap-4 items-start">
-                <iconify-icon icon="lucide:check-circle" className="text-[#9E8461] text-xl mt-1 shrink-0"></iconify-icon>
+                <Icon icon="lucide:check-circle" className="text-[#9E8461] text-xl mt-1 shrink-0" />
                 <div>
                   <h4 className="text-lg font-serif text-[#264C3F] mb-2">Competitive Compensation</h4>
                   <p className="text-[#264C3F]/70 font-light">We attract top talent with compensation that reflects the value our team creates.</p>
@@ -378,7 +379,7 @@ export default function CareersPage() {
               </div>
 
               <div className="flex gap-4 items-start">
-                <iconify-icon icon="lucide:check-circle" className="text-[#9E8461] text-xl mt-1 shrink-0"></iconify-icon>
+                <Icon icon="lucide:check-circle" className="text-[#9E8461] text-xl mt-1 shrink-0" />
                 <div>
                   <h4 className="text-lg font-serif text-[#264C3F] mb-2">Flexible Work</h4>
                   <p className="text-[#264C3F]/70 font-light">Remote-first culture with intentional in-person collaboration.</p>
@@ -386,7 +387,7 @@ export default function CareersPage() {
               </div>
 
               <div className="flex gap-4 items-start">
-                <iconify-icon icon="lucide:check-circle" className="text-[#9E8461] text-xl mt-1 shrink-0"></iconify-icon>
+                <Icon icon="lucide:check-circle" className="text-[#9E8461] text-xl mt-1 shrink-0" />
                 <div>
                   <h4 className="text-lg font-serif text-[#264C3F] mb-2">Health & Wellness</h4>
                   <p className="text-[#264C3F]/70 font-light">Comprehensive health, dental, and vision insurance.</p>
@@ -394,7 +395,7 @@ export default function CareersPage() {
               </div>
 
               <div className="flex gap-4 items-start">
-                <iconify-icon icon="lucide:check-circle" className="text-[#9E8461] text-xl mt-1 shrink-0"></iconify-icon>
+                <Icon icon="lucide:check-circle" className="text-[#9E8461] text-xl mt-1 shrink-0" />
                 <div>
                   <h4 className="text-lg font-serif text-[#264C3F] mb-2">Learning & Development</h4>
                   <p className="text-[#264C3F]/70 font-light">Budget for conferences, courses, and professional growth.</p>
@@ -498,7 +499,7 @@ export default function CareersPage() {
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                <iconify-icon icon="mdi:linkedin" className="text-[#E2DBCF]/30 hover:text-[#E2DBCF] cursor-pointer text-lg"></iconify-icon>
+                <Icon icon="mdi:linkedin" className="text-[#E2DBCF]/30 hover:text-[#E2DBCF] cursor-pointer text-lg" />
               </a>
             </div>
           </div>
@@ -521,7 +522,7 @@ export default function CareersPage() {
                 className="group flex items-center gap-2 text-[#E2DBCF]/40 hover:text-[#E2DBCF] transition-colors"
               >
                 <span className="text-[10px] uppercase tracking-widest">Close</span>
-                <iconify-icon icon="lucide:x" className="text-3xl"></iconify-icon>
+                <Icon icon="lucide:x" className="text-3xl" />
               </button>
             </div>
 
@@ -589,7 +590,7 @@ export default function CareersPage() {
                   <label className="text-[9px] uppercase tracking-[0.2em] text-[#9E8461] font-bold">Your Background</label>
                   <textarea
                     name="inquiry"
-                    rows="3"
+                    rows={3}
                     placeholder="Share your experience, interests, and what excites you about Xecuit..."
                     className="bg-transparent border-b border-[#E2DBCF]/20 py-2 text-[#E2DBCF] placeholder:text-[#E2DBCF]/20 focus:outline-none focus:border-[#9E8461] transition-colors resize-none"
                     required
