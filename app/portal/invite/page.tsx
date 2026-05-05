@@ -222,7 +222,7 @@ export default function AdminInvitePage() {
       {/* HEADER */}
       <header className="sticky top-0 z-50 bg-white border-b border-[#D4D4D4] px-6 md:px-12 py-5 flex justify-between items-center">
         <div className="flex items-center gap-4">
-          <img src="https://vgbujcuwptvheqijyjbe.supabase.co/storage/v1/object/public/hmac-uploads/uploads/91674c7c-9744-4574-9bfd-0371e88f8f51/1769154265370-6f776441/Xecuit_Logo_dark_Green.png" alt="Xecuit" className="h-8" />
+          <img src="https://vgbujcuwptvheqijyjbe.supabase.co/storage/v1/object/public/hmac-uploads/uploads/91674c7c-9744-4574-9bfd-0371e88f8f51/1769154265122-c5d8062c/Group_59.png" alt="Xecuit" className="h-8" />
           <h1 className="hidden md:block text-xl font-medium tracking-tight border-l border-[#D4D4D4] pl-4 uppercase" style={{ fontFamily: 'Gilroy-Bold' }}>
             ADMIN PANEL – Portal Administration
           </h1>

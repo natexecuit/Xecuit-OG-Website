@@ -84,7 +84,7 @@ export default function PortalLoginPage() {
       {/* Brand Logo Centered */}
       <div className="mb-12">
         <img
-          src="https://vgbujcuwptvheqijyjbe.supabase.co/storage/v1/object/public/hmac-uploads/uploads/91674c7c-9744-4574-9bfd-0371e88f8f51/1769154265370-6f776441/Xecuit_Logo_dark_Green.png"
+          src="https://vgbujcuwptvheqijyjbe.supabase.co/storage/v1/object/public/hmac-uploads/uploads/91674c7c-9744-4574-9bfd-0371e88f8f51/1769154265122-c5d8062c/Group_59.png"
           alt="Xecuit Logo"
           className="h-12 w-auto"
         />

@@ -133,7 +133,11 @@ export default function PortalDashboard() {
       <header className="bg-[#264C3F] text-[#E2DBCF] sticky top-0 z-50">
         <div className="max-w-7xl mx-auto px-4 md:px-8 h-20 flex items-center justify-between">
           <div className="flex items-center gap-4">
-            <span className="font-gilroy-bold text-lg md:text-xl tracking-widest uppercase">Xecuit Holdings LLC</span>
+            <img
+              src="https://vgbujcuwptvheqijyjbe.supabase.co/storage/v1/object/public/hmac-uploads/uploads/91674c7c-9744-4574-9bfd-0371e88f8f51/1769154265122-c5d8062c/Group_59.png"
+              alt="Xecuit"
+              className="h-8 w-auto"
+            />
           </div>
 
           {/* Desktop Nav */}
