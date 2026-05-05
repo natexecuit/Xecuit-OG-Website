@@ -3,7 +3,7 @@
 export function generateInviteEmail({
   recipientEmail,
   password,
-  portalUrl = 'https://portal.xecuit.com',
+  portalUrl = 'https://xecuit.com/portal',
 }: {
   recipientEmail: string;
   password: string;
@@ -137,7 +137,7 @@ export function generateInviteEmail({
 export function generateInviteEmailText({
   recipientEmail,
   password,
-  portalUrl = 'https://portal.xecuit.com',
+  portalUrl = 'https://xecuit.com/portal',
 }: {
   recipientEmail: string;
   password: string;

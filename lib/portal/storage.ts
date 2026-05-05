@@ -1,10 +1,11 @@
-// Simple file-based user storage for the portal
+// Simple in-memory user storage for the portal
 // In production, use a proper database
 
 import fs from 'fs';
 import path from 'path';
 
-const DATA_DIR = path.join(process.cwd(), 'data');
+// Use /tmp directory for Vercel compatibility
+const DATA_DIR = process.env.VERCEL ? '/tmp/data' : path.join(process.cwd(), 'data');
 const USERS_FILE = path.join(DATA_DIR, 'portal-users.json');
 
 export interface PortalUser {
@@ -18,11 +19,15 @@ export interface PortalUser {
 
 // Initialize data directory and file
 function ensureDataDir(): void {
-  if (!fs.existsSync(DATA_DIR)) {
-    fs.mkdirSync(DATA_DIR, { recursive: true });
-  }
-  if (!fs.existsSync(USERS_FILE)) {
-    fs.writeFileSync(USERS_FILE, JSON.stringify([], null, 2));
+  try {
+    if (!fs.existsSync(DATA_DIR)) {
+      fs.mkdirSync(DATA_DIR, { recursive: true });
+    }
+    if (!fs.existsSync(USERS_FILE)) {
+      fs.writeFileSync(USERS_FILE, JSON.stringify([], null, 2));
+    }
+  } catch (error) {
+    console.warn('[Storage] Could not initialize data directory, using in-memory fallback');
   }
 }
 
@@ -30,17 +35,24 @@ function ensureDataDir(): void {
 function getUsers(): PortalUser[] {
   ensureDataDir();
   try {
-    const data = fs.readFileSync(USERS_FILE, 'utf-8');
-    return JSON.parse(data);
+    if (fs.existsSync(USERS_FILE)) {
+      const data = fs.readFileSync(USERS_FILE, 'utf-8');
+      return JSON.parse(data);
+    }
   } catch (error) {
-    return [];
+    console.warn('[Storage] Could not read users file, using in-memory fallback');
   }
+  return [];
 }
 
 // Save all users
 function saveUsers(users: PortalUser[]): void {
   ensureDataDir();
-  fs.writeFileSync(USERS_FILE, JSON.stringify(users, null, 2));
+  try {
+    fs.writeFileSync(USERS_FILE, JSON.stringify(users, null, 2));
+  } catch (error) {
+    console.warn('[Storage] Could not save users file, data will be lost on redeploy');
+  }
 }
 
 // Generate unique ID
