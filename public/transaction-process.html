@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Xecuit — Transaction Process &amp; Execution Framework</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
+    <style>
+        @font-face {
+            font-family: 'Gilroy-Bold';
+            src: url('https://vgbujcuwptvheqijyjbe.supabase.co/storage/v1/object/public/hmac-uploads/uploads/91674c7c-9744-4574-9bfd-0371e88f8f51/1769154322537-56f5335a/Gilroy-Bold.ttf') format('truetype');
+        }
+        @font-face {
+            font-family: 'Gilroy-SemiBold';
+            src: url('https://vgbujcuwptvheqijyjbe.supabase.co/storage/v1/object/public/hmac-uploads/uploads/91674c7c-9744-4574-9bfd-0371e88f8f51/1769154383945-0b144363/Gilroy-SemiBold.ttf') format('truetype');
+        }
+        @font-face {
+            font-family: 'Gilroy-Medium';
+            src: url('https://vgbujcuwptvheqijyjbe.supabase.co/storage/v1/object/public/hmac-uploads/uploads/91674c7c-9744-4574-9bfd-0371e88f8f51/1769154383794-c0dd6ba6/Gilroy-Medium.ttf') format('truetype');
+        }
+        @font-face {
+            font-family: 'Gilroy-Regular';
+            src: url('https://vgbujcuwptvheqijyjbe.supabase.co/storage/v1/object/public/hmac-uploads/uploads/91674c7c-9744-4574-9bfd-0371e88f8f51/1769154383871-7a29b740/Gilroy-Regular.ttf') format('truetype');
+        }
+
+        :root {
+            --brand-green: #264C3F;
+            --brand-tan: #E2DBCF;
+            --brand-gold: #9E8461;
+            --brand-charcoal: #1a1a1a;
+        }
+
+        body {
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+            font-family: 'Gilroy-Regular', sans-serif;
+        }
+
+        .letterhead-container {
+            width: 1200px;
+            margin: 60px auto;
+            min-height: 1550px;
+            background-color: var(--brand-tan);
+            box-shadow: 0 40px 100px -20px rgba(0,0,0,0.15);
+            display: flex;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .texture-overlay {
+            position: absolute;
+            inset: 0;
+            pointer-events: none;
+            opacity: 0.15;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+            z-index: 1;
+        }
+
+        .sidebar {
+            width: 25%;
+            background-color: var(--brand-green);
+            padding: 60px 40px;
+            display: flex;
+            flex-direction: column;
+            z-index: 10;
+            position: relative;
+            color: var(--brand-tan);
+        }
+
+        .gold-line {
+            position: absolute;
+            right: 0;
+            top: 15%;
+            bottom: 15%;
+            width: 1px;
+            background: linear-gradient(to bottom, transparent, var(--brand-gold), transparent);
+            opacity: 0.5;
+        }
+
+        .main-content {
+            width: 75%;
+            padding: 80px 100px;
+            position: relative;
+            z-index: 5;
+            color: var(--brand-charcoal);
+        }
+
+        .process-node {
+            position: relative;
+            padding-left: 40px;
+            margin-bottom: 48px;
+        }
+
+        .process-node::before {
+            content: "";
+            position: absolute;
+            left: 0;
+            top: 8px;
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background-color: var(--brand-gold);
+        }
+
+        .process-node::after {
+            content: "";
+            position: absolute;
+            left: 4.5px;
+            top: 24px;
+            bottom: -56px;
+            width: 1px;
+            background-color: rgba(158, 132, 97, 0.2);
+        }
+
+        .process-node:last-of-type::after {
+            display: none;
+        }
+
+        .objective-tag {
+            color: var(--brand-gold);
+            font-family: 'Gilroy-SemiBold', sans-serif;
+            text-transform: uppercase;
+            font-size: 11px;
+            letter-spacing: 0.1em;
+        }
+
+        .timeline-tag {
+            font-family: 'Gilroy-Medium', sans-serif;
+            font-size: 13px;
+            opacity: 0.6;
+        }
+
+        .sidebar-footer {
+            margin-top: auto;
+            font-size: 10px;
+            font-family: 'Gilroy-Medium', sans-serif;
+            text-transform: uppercase;
+            letter-spacing: 0.2em;
+            opacity: 0.4;
+        }
+    </style>
+</head>
+<body>
+    <div class="min-h-screen bg-[#f8f7f5] flex items-center justify-center p-8">
+        <div class="letterhead-container">
+            <div class="texture-overlay"></div>
+
+            <!-- LEFT SIDEBAR -->
+            <aside class="sidebar">
+                <div class="mb-16">
+                    <img src="https://vgbujcuwptvheqijyjbe.supabase.co/storage/v1/object/public/hmac-uploads/uploads/91674c7c-9744-4574-9bfd-0371e88f8f51/1769154265122-c5d8062c/Group_59.png" alt="Xecuit" class="w-32 h-auto">
+                </div>
+
+                <div class="space-y-6 mt-12">
+                    <h2 class="font-['Gilroy-Bold'] text-xs uppercase tracking-[0.3em] opacity-90">
+                        Xecuit Holdings LLC
+                    </h2>
+                    <div class="w-8 h-[2px] bg-[#9E8461]"></div>
+                    <p class="font-['Gilroy-Medium'] text-[15px] leading-relaxed tracking-wide opacity-80">
+                        Transaction Process &amp;<br>Execution Framework
+                    </p>
+                </div>
+
+                <div class="mt-16 space-y-8 opacity-60 font-['Gilroy-Regular'] text-[11px] leading-relaxed uppercase tracking-widest">
+                    <div>
+                        <p>Institutional</p>
+                        <p>Evergreen</p>
+                        <p>Selective</p>
+                    </div>
+                    <div>
+                        <p>Principal Operations</p>
+                        <p>Infrastructure Edge</p>
+                    </div>
+                </div>
+
+                <div class="sidebar-footer">
+                    <p>Evergreen holding company constructing platform-anchored ecosystems across industry-agnostic opportunities.</p>
+                    <p class="mt-2">© 2026 Xecuit Holdings LLC</p>
+                </div>
+
+                <div class="gold-line"></div>
+            </aside>
+
+            <!-- MAIN CONTENT -->
+            <main class="main-content">
+                <header class="mb-16">
+                    <div class="flex justify-between items-start mb-12">
+                        <div>
+                            <h1 class="font-['Gilroy-Bold'] text-[32px] text-[#1a1a1a] uppercase tracking-tight leading-tight mb-2">
+                                Transaction Process &amp;<br>Execution Framework
+                            </h1>
+                            <p class="font-['Gilroy-Medium'] text-[#9E8461] uppercase tracking-[0.2em] text-xs">
+                                Xecuit Holdings LLC — Operational Mandate
+                            </p>
+                        </div>
+                        <div class="text-right opacity-30 font-['Gilroy-Medium'] text-[10px] uppercase tracking-widest">Counterparty Document</div>
+                    </div>
+
+                    <div class="max-w-[720px]">
+                        <p class="font-['Gilroy-Medium'] text-[15px] leading-[1.7] opacity-80">
+                            Xecuit Holdings LLC operates a disciplined, multi-stage acquisition process designed to evaluate, structure, and execute transactions with speed, precision, and certainty. The firm applies a consistent underwriting and execution framework across opportunities, enabling efficient decision-making while maintaining rigorous analytical standards.
+                        </p>
+                        <p class="font-['Gilroy-Medium'] text-[15px] leading-[1.7] opacity-80 mt-4">
+                            Xecuit's process is designed to minimize disruption to the target business while providing clarity to sellers, advisors, and counterparties at each stage of engagement.
+                        </p>
+                    </div>
+                </header>
+
+                <section class="space-y-2">
+                    <!-- STAGE 1 -->
+                    <div class="process-node">
+                        <h3 class="font-['Gilroy-Bold'] text-lg mb-2">1. Preliminary Evaluation</h3>
+                        <p class="text-[14px] leading-relaxed opacity-75 mb-3">
+                            Initial review of opportunity based on available materials. Assessment against investment criteria and platform strategy. Identification of key value drivers, risks, and strategic fit.
+                        </p>
+                        <div class="flex items-center gap-6">
+                            <span class="objective-tag">Objective: <span class="text-[#1a1a1a] font-['Gilroy-Regular'] opacity-80 normal-case tracking-normal ml-1">Rapid qualification and alignment on advancement.</span></span>
+                            <span class="timeline-tag">Timeline: 24–72 hours</span>
+                        </div>
+                    </div>
+
+                    <!-- STAGE 2 -->
+                    <div class="process-node">
+                        <h3 class="font-['Gilroy-Bold'] text-lg mb-2">2. Indication of Interest (IOI)</h3>
+                        <p class="text-[14px] leading-relaxed opacity-75 mb-3">
+                            Submission of a non-binding indication of interest where appropriate. High-level valuation range and preliminary transaction structure. Identification of key assumptions and areas for further diligence.
+                        </p>
+                        <div class="flex items-center gap-6">
+                            <span class="objective-tag">Objective: <span class="text-[#1a1a1a] font-['Gilroy-Regular'] opacity-80 normal-case tracking-normal ml-1">Establish early alignment on valuation and process.</span></span>
+                        </div>
+                    </div>
+
+                    <!-- STAGE 3 -->
+                    <div class="process-node">
+                        <h3 class="font-['Gilroy-Bold'] text-lg mb-2">3. Supplemental Information Review</h3>
+                        <p class="text-[14px] leading-relaxed opacity-75 mb-3">
+                            Targeted follow-up on incomplete or missing materials. Refinement of underwriting assumptions based on additional data. Focused interaction with advisors and/or management as needed.
+                        </p>
+                        <div class="flex items-center gap-6">
+                            <span class="objective-tag">Objective: <span class="text-[#1a1a1a] font-['Gilroy-Regular'] opacity-80 normal-case tracking-normal ml-1">Develop sufficient visibility to support formal proposal.</span></span>
+                        </div>
+                    </div>
+
+                    <!-- STAGE 4 -->
+                    <div class="process-node">
+                        <h3 class="font-['Gilroy-Bold'] text-lg mb-2">4. Letter of Intent (LOI)</h3>
+                        <p class="text-[14px] leading-relaxed opacity-75 mb-3">
+                            Submission of a non-binding Letter of Intent outlining key economic and structural terms. Definition of transaction framework, including capital structure and key conditions. Establishment of exclusivity period, where applicable.
+                        </p>
+                        <div class="flex items-center gap-6">
+                            <span class="objective-tag">Objective: <span class="text-[#1a1a1a] font-['Gilroy-Regular'] opacity-80 normal-case tracking-normal ml-1">Formalize alignment and transition to confirmatory diligence.</span></span>
+                        </div>
+                    </div>
+
+                    <!-- STAGE 5 -->
+                    <div class="process-node">
+                        <h3 class="font-['Gilroy-Bold'] text-lg mb-2">5. Confirmatory Diligence</h3>
+                        <p class="text-[14px] leading-relaxed opacity-75 mb-3">
+                            Comprehensive financial diligence, including Quality of Earnings analysis. Operational and commercial diligence focused on sustainability and scalability. Management interviews and site visits. Validation of key assumptions.
+                        </p>
+                        <div class="flex items-center gap-6">
+                            <span class="objective-tag">Objective: <span class="text-[#1a1a1a] font-['Gilroy-Regular'] opacity-80 normal-case tracking-normal ml-1">Validate core investment thesis.</span></span>
+                            <span class="timeline-tag uppercase text-[11px] tracking-widest text-[#9E8461]">Approach: Focused, hypothesis-driven</span>
+                        </div>
+                    </div>
+
+                    <!-- STAGE 6 -->
+                    <div class="process-node">
+                        <h3 class="font-['Gilroy-Bold'] text-lg mb-2">6. Transaction Structuring &amp; Documentation</h3>
+                        <p class="text-[14px] leading-relaxed opacity-75 mb-3">
+                            Finalization of transaction structure aligned with business objectives. Coordination with legal, tax, and advisory teams. Negotiation and execution of definitive agreements.
+                        </p>
+                        <div class="flex items-center gap-6">
+                            <span class="objective-tag">Objective: <span class="text-[#1a1a1a] font-['Gilroy-Regular'] opacity-80 normal-case tracking-normal ml-1">Translate agreed terms into executable documentation.</span></span>
+                        </div>
+                    </div>
+
+                    <!-- STAGE 7 -->
+                    <div class="process-node">
+                        <h3 class="font-['Gilroy-Bold'] text-lg mb-2">7. Final Approval &amp; Closing</h3>
+                        <p class="text-[14px] leading-relaxed opacity-75 mb-3">
+                            Final internal review and capital alignment. Execution of definitive agreements. Coordination of closing logistics and funding.
+                        </p>
+                        <div class="flex items-center gap-6">
+                            <span class="objective-tag">Objective: <span class="text-[#1a1a1a] font-['Gilroy-Regular'] opacity-80 normal-case tracking-normal ml-1">Efficient closing with minimal execution risk.</span></span>
+                        </div>
+                    </div>
+                </section>
+
+                <footer class="mt-24 pt-12 border-t border-[#9E8461]/20">
+                    <div class="flex justify-between items-center">
+                        <div>
+                            <p class="font-['Gilroy-Bold'] text-xs uppercase tracking-widest text-[#1a1a1a]/40">Confidential Submission</p>
+                            <p class="font-['Gilroy-Medium'] text-[10px] text-[#1a1a1a]/30 mt-1 uppercase tracking-tight">Intended solely for the recipient counterparties and strategic advisors.</p>
+                        </div>
+                        <div class="flex items-center gap-8">
+                             <div class="text-right">
+                                <p class="font-['Gilroy-Bold'] text-[10px] uppercase tracking-widest">Status</p>
+                                <p class="font-['Gilroy-Medium'] text-[12px] text-[#9E8461]">Active Mandate</p>
+                             </div>
+                             <img src="https://vgbujcuwptvheqijyjbe.supabase.co/storage/v1/object/public/hmac-uploads/uploads/91674c7c-9744-4574-9bfd-0371e88f8f51/1770080544668-66c54807/X_icon_dark_green.png" alt="X Icon" class="w-6 h-6 opacity-20 grayscale" style="width: 37px;">
+                        </div>
+                    </div>
+                </footer>
+            </main>
+        </div>
+    </div>
+
+</body></html>

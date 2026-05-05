@@ -1,0 +1,581 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Xecuit — Institutional Pitch Deck</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
+    <style>
+        @font-face {
+            font-family: 'Gilroy-Bold';
+            src: url('https://vgbujcuwptvheqijyjbe.supabase.co/storage/v1/object/public/hmac-uploads/uploads/91674c7c-9744-4574-9bfd-0371e88f8f51/1769154322537-56f5335a/Gilroy-Bold.ttf') format('truetype');
+        }
+        @font-face {
+            font-family: 'Gilroy-SemiBold';
+            src: url('https://vgbujcuwptvheqijyjbe.supabase.co/storage/v1/object/public/hmac-uploads/uploads/91674c7c-9744-4574-9bfd-0371e88f8f51/1769154383945-0b144363/Gilroy-SemiBold.ttf') format('truetype');
+        }
+        @font-face {
+            font-family: 'Gilroy-Medium';
+            src: url('https://vgbujcuwptvheqijyjbe.supabase.co/storage/v1/object/public/hmac-uploads/uploads/91674c7c-9744-4574-9bfd-0371e88f8f51/1769154383794-c0dd6ba6/Gilroy-Medium.ttf') format('truetype');
+        }
+        @font-face {
+            font-family: 'Gilroy-Regular';
+            src: url('https://vgbujcuwptvheqijyjbe.supabase.co/storage/v1/object/public/hmac-uploads/uploads/91674c7c-9744-4574-9bfd-0371e88f8f51/1769154383871-7a29b740/Gilroy-Regular.ttf') format('truetype');
+        }
+
+        :root {
+            --brand-green: #264C3F;
+            --brand-cream: #E2DBCF;
+            --brand-gold: #9E8461;
+        }
+
+        .font-gilroy-bold { font-family: 'Gilroy-Bold', sans-serif; }
+        .font-gilroy-semibold { font-family: 'Gilroy-SemiBold', sans-serif; }
+        .font-gilroy-medium { font-family: 'Gilroy-Medium', sans-serif; }
+        .font-gilroy-regular { font-family: 'Gilroy-Regular', sans-serif; }
+
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: #0c0c0c;
+            overflow: hidden;
+            color: var(--brand-cream);
+        }
+
+        .presentation-wrapper {
+            width: 100vw;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+
+        .slide-frame {
+            width: 1200px;
+            height: 900px;
+            position: relative;
+            box-shadow: 0 50px 100px -20px rgba(0,0,0,0.8);
+            background-color: #fff;
+            overflow: hidden;
+        }
+
+        .slide {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.6s ease-in-out, visibility 0.6s ease-in-out;
+            display: flex;
+            z-index: 10;
+        }
+
+        .slide.active {
+            opacity: 1;
+            visibility: visible;
+            z-index: 20;
+        }
+
+        .nav-controls {
+            position: fixed;
+            bottom: 40px;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: rgba(38, 76, 63, 0.95);
+            padding: 12px 24px;
+            border-radius: 99px;
+            display: flex;
+            align-items: center;
+            gap: 24px;
+            z-index: 100;
+            border: 1px solid rgba(158, 132, 97, 0.3);
+            box-shadow: 0 10px 40px rgba(0,0,0,0.4);
+            backdrop-filter: blur(8px);
+        }
+
+        .nav-btn {
+            width: 44px;
+            height: 44px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            background: rgba(226, 219, 207, 0.05);
+            color: var(--brand-cream);
+            transition: all 0.2s ease;
+            cursor: pointer;
+        }
+
+        .nav-btn:hover {
+            background: rgba(158, 132, 97, 0.2);
+            color: white;
+        }
+
+        .nav-btn.disabled {
+            opacity: 0.2;
+            cursor: not-allowed;
+            background: transparent;
+        }
+
+        .slide-counter {
+            font-family: 'Gilroy-Medium', sans-serif;
+            font-size: 13px;
+            letter-spacing: 0.2em;
+            color: var(--brand-cream);
+            min-width: 60px;
+            text-align: center;
+        }
+
+        .split-left {
+            width: 50%;
+            height: 100%;
+            background-color: var(--brand-green);
+            padding: 80px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            color: var(--brand-cream);
+            position: relative;
+        }
+
+        .split-right {
+            width: 50%;
+            height: 100%;
+            background-color: var(--brand-cream);
+            padding: 80px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            color: var(--brand-green);
+            position: relative;
+        }
+
+        .gold-divider {
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            width: 2px;
+            height: 600px;
+            background-color: var(--brand-gold);
+            z-index: 30;
+        }
+
+        .noise-overlay {
+            position: absolute;
+            inset: 0;
+            pointer-events: none;
+            z-index: 5;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+            opacity: 0.03;
+        }
+
+        .bullet-point {
+            position: relative;
+            padding-left: 2rem;
+            margin-bottom: 1.5rem;
+        }
+        .bullet-point::before {
+            content: "";
+            position: absolute;
+            left: 0;
+            top: 0.6em;
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background-color: var(--brand-gold);
+        }
+
+        .keyboard-hint {
+            position: fixed;
+            bottom: 40px;
+            right: 40px;
+            font-family: 'Gilroy-Medium', sans-serif;
+            font-size: 10px;
+            text-transform: uppercase;
+            letter-spacing: 0.3em;
+            opacity: 0.2;
+            color: var(--brand-cream);
+        }
+
+        .split-right::-webkit-scrollbar { width: 4px; }
+        .split-right::-webkit-scrollbar-thumb { background: var(--brand-gold); }
+    </style>
+</head>
+<body>
+    <div class="presentation-wrapper">
+        <div class="slide-frame">
+            <div class="gold-divider"></div>
+            <div class="noise-overlay"></div>
+
+            <!-- SLIDE 1: COVER -->
+            <div class="slide active" id="slide-1">
+                <div class="split-left">
+                    <div>
+                        <img src="https://vgbujcuwptvheqijyjbe.supabase.co/storage/v1/object/public/hmac-uploads/uploads/91674c7c-9744-4574-9bfd-0371e88f8f51/1769154265122-c5d8062c/Group_59.png" alt="Xecuit" class="h-10 w-auto">
+                    </div>
+                    <div>
+                        <h1 class="font-gilroy-bold text-[72px] leading-none tracking-tight mb-4 uppercase"><br>A Buyer<br>Profile
+                        </h1>
+                        <div class="w-24 h-1 bg-[#9E8461]"></div>
+                    </div>
+                    <div class="opacity-30 font-gilroy-medium text-[10px] tracking-[0.5em] uppercase">
+                        Acquisition Infrastructure
+                    </div>
+                </div>
+                <div class="split-right">
+                    <div class="flex justify-end font-gilroy-medium text-[10px] tracking-[0.4em] opacity-40 uppercase">
+                        ESTABLISHED 2018</div>
+                    <div class="ml-12 max-w-[420px]">
+                        <h2 class="font-gilroy-bold text-[38px] leading-[1.3] tracking-tight mb-8">
+                            Evergreen Capital for Selective Acquisition
+                        </h2>
+                        <p class="font-gilroy-medium text-[16px] uppercase tracking-[0.4em] text-[#264C3F]/60 mb-6">
+                            Building Systems for Enduring Value
+                        </p>
+                        <div class="space-y-5">
+                            <p class="font-gilroy-medium text-[16px] leading-relaxed opacity-80">
+                                Xecuit Holdings LLC is an acquisition-focused holding company executing a long-duration investment strategy centered on building integrated business ecosystems across targeted sectors.
+                            </p>
+                            <p class="font-gilroy-medium text-[16px] leading-relaxed opacity-80">
+                                The firm operates as a principal investor, acquiring controlling or significant ownership positions in profitable, growth-stage businesses and scaling them through structured operational and strategic integration.
+                            </p>
+                            <p class="font-gilroy-medium text-[16px] leading-relaxed opacity-80">
+                                Xecuit combines disciplined underwriting with a data-driven execution model to identify, acquire, and expand platform businesses with the objective of creating durable, multi-asset value.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="flex justify-end">
+                        <div class="flex items-center gap-4 opacity-40">
+                            <span class="font-gilroy-medium text-[10px] uppercase tracking-widest">Institutional Presentation</span>
+                            <iconify-icon icon="lucide:arrow-right"></iconify-icon>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- SLIDE 2: STRATEGIC OVERVIEW -->
+            <div class="slide" id="slide-2">
+                <div class="split-left">
+                    <div>
+                         <img src="https://vgbujcuwptvheqijyjbe.supabase.co/storage/v1/object/public/hmac-uploads/uploads/91674c7c-9744-4574-9bfd-0371e88f8f51/1770080550672-0bb73b55/Group_55.png" alt="Xecuit" class="opacity-80" style="width: 48px; height: auto;">
+                    </div>
+                    <div class="mt-auto">
+                        <h2 class="font-gilroy-bold text-[54px] leading-tight uppercase tracking-tight">
+                            Strategic<br>Overview
+                        </h2>
+                        <div class="w-16 h-1 bg-[#9E8461] mt-8"></div>
+                    </div>
+                    <p class="font-gilroy-medium text-[18px] opacity-70 tracking-wide max-w-[320px] mb-8">
+                        A long-duration investment strategy centered on building integrated business ecosystems.
+                    </p>
+                </div>
+                <div class="split-right flex flex-col justify-center">
+                    <div class="max-w-[480px] ml-auto mr-4">
+                        <p class="font-gilroy-medium text-[16px] leading-relaxed opacity-90 mb-8">
+                            Xecuit's strategy is built around the identification of platform businesses in evergreen industries, followed by the systematic development of surrounding portfolios of synergistic and complementary businesses. This model is executed through a repeatable framework:
+                        </p>
+                        <ul class="space-y-4 mb-8 font-gilroy-medium text-[14px] leading-relaxed tracking-wide">
+                            <li class="bullet-point">
+                                <span class="font-gilroy-bold">Platform Identification</span> — Targeting strong, profitable businesses that serve as the foundation of an ecosystem within resilient, long-duration industries.
+                            </li>
+                            <li class="bullet-point">
+                                <span class="font-gilroy-bold">Strategic Expansion</span> — Acquiring adjacent and complementary businesses that enhance capabilities across key functions such as distribution, logistics, customer acquisition, and operations.
+                            </li>
+                            <li class="bullet-point">
+                                <span class="font-gilroy-bold">Operational Integration</span> — Aligning portfolio companies through shared infrastructure, data systems, and centralized capabilities to drive efficiency and scale.
+                            </li>
+                            <li class="bullet-point">
+                                <span class="font-gilroy-bold">Value Creation at the Ecosystem Level</span> — Generating returns through the combined performance of interconnected businesses, rather than reliance on a single asset.
+                            </li>
+                        </ul>
+                        <p class="font-gilroy-medium text-[15px] leading-relaxed opacity-80 italic border-l border-[#9E8461] pl-6">
+                            This approach enables Xecuit to build scalable, defensible platforms with diversified revenue streams and embedded operational leverage.
+                        </p>
+                    </div>
+                    <div class="absolute bottom-12 right-12 font-gilroy-medium text-[10px] tracking-[0.4em] opacity-30 uppercase">
+                        02 / STRATEGIC OVERVIEW
+                    </div>
+                </div>
+            </div>
+
+            <!-- SLIDE 3: INVESTMENT CRITERIA -->
+            <div class="slide" id="slide-3">
+                <div class="split-left">
+                    <div>
+                         <img src="https://vgbujcuwptvheqijyjbe.supabase.co/storage/v1/object/public/hmac-uploads/uploads/91674c7c-9744-4574-9bfd-0371e88f8f51/1770080550672-0bb73b55/Group_55.png" alt="Xecuit" class="opacity-80" style="width: 48px; height: auto;">
+                    </div>
+                    <div class="mt-auto">
+                        <h2 class="font-gilroy-bold text-[54px] leading-tight uppercase tracking-tight">
+                            Investment<br>Criteria
+                        </h2>
+                        <div class="w-16 h-1 bg-[#9E8461] mt-8"></div>
+                    </div>
+                    <p class="font-gilroy-medium text-[18px] opacity-70 tracking-wide max-w-[320px] mb-8">
+                        Our specific acquisition mandates and strategic filters for platform development.
+                    </p>
+                </div>
+                <div class="split-right flex flex-col justify-center">
+                    <div class="max-w-[480px] ml-auto mr-4">
+                        <div class="space-y-6">
+                            <div>
+                                <h3 class="font-gilroy-bold text-[13px] uppercase tracking-[0.2em] text-[#9E8461] mb-2">Transaction Type</h3>
+                                <ul class="space-y-1 font-gilroy-medium text-[17px] opacity-90">
+                                    <li class="flex items-start gap-3"><div class="w-1.5 h-1.5 rounded-full bg-[#9E8461] mt-2 flex-shrink-0"></div> Control acquisitions</li>
+                                    <li class="flex items-start gap-3"><div class="w-1.5 h-1.5 rounded-full bg-[#9E8461] mt-2 flex-shrink-0"></div> Majority or structured equity investments</li>
+                                </ul>
+                            </div>
+                            <div>
+                                <h3 class="font-gilroy-bold text-[13px] uppercase tracking-[0.2em] text-[#9E8461] mb-2">Target Profile</h3>
+                                <ul class="space-y-1 font-gilroy-medium text-[17px] opacity-90">
+                                    <li class="flex items-start gap-3"><div class="w-1.5 h-1.5 rounded-full bg-[#9E8461] mt-2 flex-shrink-0"></div> Profitable, growth-stage businesses</li>
+                                    <li class="flex items-start gap-3"><div class="w-1.5 h-1.5 rounded-full bg-[#9E8461] mt-2 flex-shrink-0"></div> Strong unit economics and scalable infrastructure</li>
+                                    <li class="flex items-start gap-3"><div class="w-1.5 h-1.5 rounded-full bg-[#9E8461] mt-2 flex-shrink-0"></div> Opportunities for operational enhancement and strategic expansion</li>
+                                </ul>
+                            </div>
+                            <div>
+                                <h3 class="font-gilroy-bold text-[13px] uppercase tracking-[0.2em] text-[#9E8461] mb-2">Sectors of Focus</h3>
+                                <ul class="space-y-1 font-gilroy-medium text-[17px] opacity-90">
+                                    <li class="flex items-start gap-3"><div class="w-1.5 h-1.5 rounded-full bg-[#9E8461] mt-2 flex-shrink-0"></div> Evergreen Platform Businesses Across Resilient Industries</li>
+                                </ul>
+                            </div>
+                            <div>
+                                <h3 class="font-gilroy-bold text-[13px] uppercase tracking-[0.2em] text-[#9E8461] mb-2">Geography</h3>
+                                <ul class="space-y-1 font-gilroy-medium text-[17px] opacity-90">
+                                    <li class="flex items-start gap-3"><div class="w-1.5 h-1.5 rounded-full bg-[#9E8461] mt-2 flex-shrink-0"></div> Primarily United States</li>
+                                    <li class="flex items-start gap-3"><div class="w-1.5 h-1.5 rounded-full bg-[#9E8461] mt-2 flex-shrink-0"></div> Select international opportunities</li>
+                                </ul>
+                            </div>
+                            <div>
+                                <h3 class="font-gilroy-bold text-[13px] uppercase tracking-[0.2em] text-[#9E8461] mb-2">Transaction Size</h3>
+                                <ul class="space-y-1 font-gilroy-medium text-[17px] opacity-90">
+                                    <li class="flex items-start gap-3"><div class="w-1.5 h-1.5 rounded-full bg-[#9E8461] mt-2 flex-shrink-0"></div> Flexible mandate across middle-market opportunities</li>
+                                    <li class="flex items-start gap-3"><div class="w-1.5 h-1.5 rounded-full bg-[#9E8461] mt-2 flex-shrink-0"></div> Typical focus: $25M to $250M+ enterprise value</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="absolute bottom-12 right-12 font-gilroy-medium text-[10px] tracking-[0.4em] opacity-30 uppercase">
+                        03 / INVESTMENT CRITERIA
+                    </div>
+                </div>
+            </div>
+
+            <!-- SLIDE 4: CAPITAL POSITIONING -->
+            <div class="slide" id="slide-4">
+                <div class="split-left">
+                    <div>
+                         <img src="https://vgbujcuwptvheqijyjbe.supabase.co/storage/v1/object/public/hmac-uploads/uploads/91674c7c-9744-4574-9bfd-0371e88f8f51/1770080550672-0bb73b55/Group_55.png" alt="Xecuit" class="opacity-80" style="width: 48px; height: auto;">
+                    </div>
+                    <div class="mt-auto">
+                        <h2 class="font-gilroy-bold text-[54px] leading-tight uppercase tracking-tight">
+                            Capital<br>Positioning
+                        </h2>
+                        <div class="w-16 h-1 bg-[#9E8461] mt-8"></div>
+                    </div>
+                    <p class="font-gilroy-medium text-[18px] opacity-70 tracking-wide max-w-[320px] mb-8">
+                        A structured financial framework supporting institutional-grade acquisition execution.
+                    </p>
+                </div>
+                <div class="split-right flex flex-col justify-center">
+                    <div class="max-w-[480px] ml-auto mr-4">
+                        <p class="font-gilroy-medium text-[16px] leading-relaxed opacity-90 mb-8">
+                            Xecuit maintains a structured capital framework supported by established relationships across banking institutions and institutional capital providers, designed to support acquisition execution.
+                        </p>
+                        <ul class="space-y-4 mb-8 font-gilroy-medium text-[14px] leading-relaxed tracking-wide">
+                            <li class="bullet-point">Access to substantial financial capacity through multiple institutional banking and capital relationships</li>
+                            <li class="bullet-point">Capital engagement structured within a pre-established investment mandate</li>
+                            <li class="bullet-point">Ability to evaluate and pursue transactions without reliance on ad hoc capital sourcing at the initial stage</li>
+                            <li class="bullet-point">Defined review and approval processes supporting efficient transaction execution</li>
+                        </ul>
+                        <p class="font-gilroy-medium text-[15px] leading-relaxed opacity-80 italic border-l border-[#9E8461] pl-6">
+                            This framework positions Xecuit as a credible, well-backed buyer with the flexibility to align appropriate capital solutions to each opportunity while maintaining speed and discipline in execution.
+                        </p>
+                    </div>
+                    <div class="absolute bottom-12 right-12 font-gilroy-medium text-[10px] tracking-[0.4em] opacity-30 uppercase">
+                        04 / CAPITAL POSITIONING
+                    </div>
+                </div>
+            </div>
+
+            <!-- SLIDE 5: IDEAL TARGET PROFILE -->
+            <div class="slide" id="slide-5">
+                <div class="split-left">
+                    <div>
+                         <img src="https://vgbujcuwptvheqijyjbe.supabase.co/storage/v1/object/public/hmac-uploads/uploads/91674c7c-9744-4574-9bfd-0371e88f8f51/1770080550672-0bb73b55/Group_55.png" alt="Xecuit" class="opacity-80" style="width: 48px; height: auto;">
+                    </div>
+                    <div class="mt-auto">
+                        <h2 class="font-gilroy-bold text-[54px] leading-tight uppercase tracking-tight">
+                            Ideal Target<br>Profile
+                        </h2>
+                        <div class="w-16 h-1 bg-[#9E8461] mt-8"></div>
+                    </div>
+                    <p class="font-gilroy-medium text-[18px] opacity-70 tracking-wide max-w-[320px] mb-8">
+                        Target business characteristics and acquisition parameters.
+                    </p>
+                </div>
+                <div class="split-right flex flex-col justify-center">
+                    <div class="ml-4 space-y-4">
+                        <div class="border-b border-[#264C3F]/10 pb-4">
+                            <h3 class="font-gilroy-bold text-[14px] uppercase tracking-[0.1em] opacity-60 mb-1">Revenue Range</h3>
+                            <p class="font-gilroy-regular text-[22px]">$50M – $500M Annually</p>
+                        </div>
+                        <div class="border-b border-[#264C3F]/10 pb-4">
+                            <h3 class="font-gilroy-bold text-[14px] uppercase tracking-[0.1em] opacity-60 mb-1">EBITDA</h3>
+                            <p class="font-gilroy-regular text-[22px]">15% – 30% Net Margins</p>
+                        </div>
+                        <div class="border-b border-[#264C3F]/10 pb-4">
+                            <h3 class="font-gilroy-bold text-[14px] uppercase tracking-[0.1em] opacity-60 mb-1">Business Model</h3>
+                            <p class="font-gilroy-regular text-[22px]">B2B & B2C</p>
+                        </div>
+                        <div class="border-b border-[#264C3F]/10 pb-4">
+                            <h3 class="font-gilroy-bold text-[14px] uppercase tracking-[0.1em] opacity-60 mb-1">Geographic</h3>
+                            <p class="font-gilroy-regular text-[22px]">Global (NA & EMEA Primary)</p>
+                        </div>
+                        <div class="pb-4">
+                            <h3 class="font-gilroy-bold text-[14px] uppercase tracking-[0.1em] opacity-60 mb-1">Leadership</h3>
+                            <p class="font-gilroy-regular text-[22px]">Aligned Core Operating Teams</p>
+                        </div>
+                    </div>
+                    <div class="absolute bottom-12 right-12 font-gilroy-medium text-[10px] tracking-[0.4em] opacity-30 uppercase">
+                        05 / ACQUISITION CRITERIA
+                    </div>
+                </div>
+            </div>
+
+            <!-- SLIDE 6: EXECUTION CAPABILITIES -->
+            <div class="slide" id="slide-6">
+                <div class="split-left">
+                    <div>
+                         <img src="https://vgbujcuwptvheqijyjbe.supabase.co/storage/v1/object/public/hmac-uploads/uploads/91674c7c-9744-4574-9bfd-0371e88f8f51/1770080550672-0bb73b55/Group_55.png" alt="Xecuit" class="opacity-80" style="width: 48px; height: auto;">
+                    </div>
+                    <div class="mt-auto">
+                        <h2 class="font-gilroy-bold text-[54px] leading-tight uppercase tracking-tight">
+                            Execution<br>Capabilities
+                        </h2>
+                        <div class="w-16 h-1 bg-[#9E8461] mt-8"></div>
+                    </div>
+                    <p class="font-gilroy-medium text-[18px] opacity-70 tracking-wide max-w-[320px] mb-8">
+                        The firm emphasizes speed, precision, and repeatability, supported by internal systems and data-driven processes.
+                    </p>
+                </div>
+                <div class="split-right flex flex-col justify-center">
+                    <div class="max-w-[480px] ml-auto mr-4">
+                        <p class="font-gilroy-medium text-[16px] leading-relaxed opacity-90 mb-8">
+                            Xecuit is structured to manage the full acquisition lifecycle:
+                        </p>
+                        <ul class="space-y-4 mb-8 font-gilroy-medium text-[14px] leading-relaxed tracking-wide">
+                            <li class="bullet-point">Direct deal sourcing and proprietary origination</li>
+                            <li class="bullet-point">Financial underwriting and diligence</li>
+                            <li class="bullet-point">Transaction structuring and negotiation</li>
+                            <li class="bullet-point">Post-acquisition integration and operational scaling</li>
+                        </ul>
+                        <p class="font-gilroy-medium text-[15px] leading-relaxed opacity-80 italic border-l border-[#9E8461] pl-6">
+                            The firm emphasizes speed, precision, and repeatability, supported by internal systems and data-driven processes.
+                        </p>
+                    </div>
+                    <div class="absolute bottom-12 right-12 font-gilroy-medium text-[10px] tracking-[0.4em] opacity-30 uppercase">
+                        06 / EXECUTION CAPABILITIES
+                    </div>
+                </div>
+            </div>
+
+            <!-- SLIDE 7: APPROACH TO TRANSACTIONS -->
+            <div class="slide" id="slide-7">
+                <div class="split-left">
+                    <div>
+                         <img src="https://vgbujcuwptvheqijyjbe.supabase.co/storage/v1/object/public/hmac-uploads/uploads/91674c7c-9744-4574-9bfd-0371e88f8f51/1770080550672-0bb73b55/Group_55.png" alt="Xecuit" class="opacity-80" style="width: 48px; height: auto;">
+                    </div>
+                    <div class="mt-auto">
+                        <h2 class="font-gilroy-bold text-[54px] leading-tight uppercase tracking-tight">
+                            Approach to<br>Transactions
+                        </h2>
+                        <div class="w-16 h-1 bg-[#9E8461] mt-8"></div>
+                    </div>
+                    <p class="font-gilroy-medium text-[18px] opacity-70 tracking-wide max-w-[320px] mb-8">
+                        Our commitment to transactional integrity, speed of execution, and long-term operational stewardship.
+                    </p>
+                </div>
+                <div class="split-right flex flex-col justify-center">
+                    <div class="max-w-[480px] ml-auto mr-4">
+                        <ul class="space-y-4 mb-8 font-gilroy-medium text-[16px] leading-relaxed tracking-wide">
+                            <li class="bullet-point">Principally driven buyer with aligned capital backing</li>
+                            <li class="bullet-point">Focus on certainty of close and disciplined execution</li>
+                            <li class="bullet-point">Ability to move efficiently through diligence and closing</li>
+                            <li class="bullet-point">Long-term ownership orientation with no forced exit timelines</li>
+                        </ul>
+                        <p class="font-gilroy-medium text-[16px] leading-relaxed opacity-80 italic border-l border-[#9E8461] pl-6">
+                            Xecuit prioritizes opportunities where it can act as an active owner and drive measurable operational and strategic improvements.
+                        </p>
+                    </div>
+                    <div class="absolute bottom-12 right-12 font-gilroy-medium text-[10px] tracking-[0.4em] opacity-30 uppercase">
+                        07 / APPROACH TO TRANSACTIONS
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- Controls -->
+        <div class="nav-controls">
+            <div id="prev-btn" class="nav-btn disabled" onclick="prevSlide()">
+                <iconify-icon icon="lucide:chevron-left" class="text-2xl"></iconify-icon>
+            </div>
+            <div class="slide-counter" id="counter">1 / 7</div>
+            <div id="next-btn" class="nav-btn" onclick="nextSlide()">
+                <iconify-icon icon="lucide:chevron-right" class="text-2xl"></iconify-icon>
+            </div>
+        </div>
+
+        <div class="keyboard-hint">Use arrow keys or buttons to navigate</div>
+    </div>
+
+    <script>
+        let currentSlide = 1;
+        const totalSlides = 7;
+
+        function updateSlides() {
+            document.querySelectorAll('.slide').forEach(slide => slide.classList.remove('active'));
+            document.getElementById(`slide-${currentSlide}`).classList.add('active');
+
+            // Update counter
+            document.getElementById('counter').innerText = `${currentSlide} / ${totalSlides}`;
+
+            // Update button states
+            document.getElementById('prev-btn').classList.toggle('disabled', currentSlide === 1);
+            document.getElementById('next-btn').classList.toggle('disabled', currentSlide === totalSlides);
+        }
+
+        function nextSlide() {
+            if (currentSlide < totalSlides) {
+                currentSlide++;
+                updateSlides();
+            }
+        }
+
+        function prevSlide() {
+            if (currentSlide > 1) {
+                currentSlide--;
+                updateSlides();
+            }
+        }
+
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowRight' || e.key === 'Enter' || e.key === ' ') {
+                nextSlide();
+            }
+            if (e.key === 'ArrowLeft' || e.key === 'Backspace') {
+                prevSlide();
+            }
+        });
+
+        // Initialize
+        updateSlides();
+    </script>
+
+
+</body></html>

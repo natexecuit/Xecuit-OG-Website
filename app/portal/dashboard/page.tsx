@@ -13,6 +13,7 @@ interface Document {
   size: string;
   category: 'overview' | 'capital';
   fileUrl: string;
+  downloadUrl?: string; // Optional different URL for download (e.g., PDF for HTML deck)
 }
 
 export default function PortalDashboard() {
@@ -32,24 +33,25 @@ export default function PortalDashboard() {
   // Document data - in a real app, this would come from a database
   const documents: Document[] = [
     {
-      id: 'inv-strategy',
-      title: 'Investment Strategy',
-      description: 'Xecuit Holdings comprehensive investment framework and approach',
-      icon: 'mdi:file-pdf-box',
-      uploadDate: 'Jan 15, 2025',
-      size: '2.4 MB',
+      id: 'buyer-profile',
+      title: 'Xecuit Buyer Profile',
+      description: 'Comprehensive institutional presentation deck covering Xecuit\'s investment approach, criteria, and positioning',
+      icon: 'mdi:presentation',
+      uploadDate: 'May 5, 2026',
+      size: 'Interactive HTML',
       category: 'overview',
-      fileUrl: '/documents/investment-strategy.pdf',
+      fileUrl: '/buyer-profile-deck.html',
+      downloadUrl: '/documents/buyer-profile-deck.pdf',
     },
     {
-      id: 'acq-criteria',
-      title: 'Acquisition Criteria',
-      description: 'Target parameters and evaluation framework for potential acquisitions',
-      icon: 'mdi:file-search-outline',
-      uploadDate: 'Jan 14, 2025',
-      size: '1.8 MB',
+      id: 'transaction-process',
+      title: 'Transaction Process & Execution',
+      description: 'Seven-stage acquisition process framework from preliminary evaluation through closing',
+      icon: 'mdi:file-chart-outline',
+      uploadDate: 'May 5, 2026',
+      size: '1.6 MB',
       category: 'overview',
-      fileUrl: '/documents/acquisition-criteria.pdf',
+      fileUrl: '/documents/transaction-process.pdf',
     },
     {
       id: 'primary-capital',
@@ -89,7 +91,7 @@ export default function PortalDashboard() {
 
   const handleDownload = (doc: Document) => {
     const link = document.createElement('a');
-    link.href = doc.fileUrl;
+    link.href = doc.downloadUrl || doc.fileUrl;
     link.download = `${doc.title.toLowerCase().replace(/\s+/g, '-')}.pdf`;
     link.click();
   };
