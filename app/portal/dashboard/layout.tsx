@@ -12,15 +12,13 @@ export default function DashboardLayout({
 }
 
 function DashboardContent({
-  userEmail,
   children,
 }: {
-  userEmail: string;
   children: React.ReactNode;
 }) {
-  // Store user email in a data attribute for the dashboard to read
+  // Client-side auth will handle user email retrieval
   return (
-    <div data-user-email={userEmail}>
+    <div data-user-email="">
       {children}
     </div>
   );
