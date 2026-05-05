@@ -14,6 +14,7 @@ interface Document {
   category: 'overview' | 'capital';
   fileUrl: string;
   downloadUrl?: string; // Optional different URL for download (e.g., PDF for HTML deck)
+  downloadName?: string; // Exact filename to use for download
 }
 
 export default function PortalDashboard() {
@@ -41,7 +42,8 @@ export default function PortalDashboard() {
       size: 'Interactive HTML',
       category: 'overview',
       fileUrl: '/buyer-profile-deck.html',
-      downloadUrl: '/documents/buyer-profile-deck.pdf',
+      downloadUrl: '/documents/Xecuit Holdings Buyer Profile.pdf',
+      downloadName: 'Xecuit Holdings Buyer Profile.pdf',
     },
     {
       id: 'transaction-process',
@@ -51,7 +53,8 @@ export default function PortalDashboard() {
       uploadDate: 'May 5, 2026',
       size: '1.6 MB',
       category: 'overview',
-      fileUrl: '/documents/transaction-process.pdf',
+      fileUrl: '/documents/Xecuit Holdings Transaction Process.pdf',
+      downloadName: 'Xecuit Holdings Transaction Process.pdf',
     },
     {
       id: 'primary-capital',
@@ -61,7 +64,8 @@ export default function PortalDashboard() {
       uploadDate: 'Jan 10, 2025',
       size: '3.2 MB',
       category: 'capital',
-      fileUrl: '/documents/primary-capital.pdf',
+      fileUrl: '/documents/Xecuit Holdings-Capital Overview & Financial Capacity (3X Alliance).pdf',
+      downloadName: 'Xecuit Holdings-Capital Overview & Financial Capacity (3X Alliance).pdf',
     },
     {
       id: 'inst-capital',
@@ -71,7 +75,8 @@ export default function PortalDashboard() {
       uploadDate: 'Jan 8, 2025',
       size: '2.1 MB',
       category: 'capital',
-      fileUrl: '/documents/institutional-capital.pdf',
+      fileUrl: '/documents/Xecuit Holdings-Institutional Relationship & Financial Overview (Momentus).pdf',
+      downloadName: 'Xecuit Holdings-Institutional Relationship & Financial Overview (Momentus).pdf',
     },
   ];
 
@@ -92,7 +97,7 @@ export default function PortalDashboard() {
   const handleDownload = (doc: Document) => {
     const link = document.createElement('a');
     link.href = doc.downloadUrl || doc.fileUrl;
-    link.download = `${doc.title.toLowerCase().replace(/\s+/g, '-')}.pdf`;
+    link.download = doc.downloadName || `${doc.title.toLowerCase().replace(/\s+/g, '-')}.pdf`;
     link.click();
   };
 
