@@ -42,7 +42,7 @@ export async function POST(request: NextRequest) {
     }
 
     // Find user
-    const user = getUserByEmail(email);
+    const user = await getUserByEmail(email);
     if (!user) {
       console.log('[Portal Auth] User not found:', email);
       return NextResponse.json(
@@ -65,7 +65,7 @@ export async function POST(request: NextRequest) {
 
     // Update user status to active if this is their first login
     if (user.status === 'pending') {
-      updateUserStatus(email, 'active');
+      await updateUserStatus(email, 'active');
     }
 
     // Create session

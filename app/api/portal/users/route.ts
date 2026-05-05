@@ -17,8 +17,13 @@ export async function GET(request: NextRequest) {
       );
     }
 
-    const users = getAllUsers();
-    return NextResponse.json({ users });
+    const users = await getAllUsers();
+    // Ensure password field is present for all users (for old records)
+    const usersWithPassword = users.map(user => ({
+      ...user,
+      password: user.password || '', // Ensure password field exists
+    }));
+    return NextResponse.json({ users: usersWithPassword });
   } catch (error) {
     console.error('[Get Users Error]', error);
     return NextResponse.json(
@@ -72,7 +77,7 @@ export async function POST(request: NextRequest) {
 
     // Create user
     const passwordHash = hashPassword(finalPassword);
-    const user = createUser(email, passwordHash);
+    const user = await createUser(email, finalPassword, passwordHash);
 
     // Send invite email
     let emailSent = false;
@@ -150,7 +155,7 @@ export async function DELETE(request: NextRequest) {
       );
     }
 
-    const deleted = deleteUser(email);
+    const deleted = await deleteUser(email);
     if (!deleted) {
       return NextResponse.json(
         { error: 'User not found' },

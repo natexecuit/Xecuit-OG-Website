@@ -5,7 +5,7 @@ import { getAllUsers } from '@/lib/portal/storage';
 export async function GET(request: NextRequest) {
   const sessionToken = request.cookies.get('portal-session')?.value;
   const session = sessionToken ? getSession(sessionToken) : null;
-  const users = getAllUsers();
+  const users = await getAllUsers();
 
   return NextResponse.json({
     sessionToken: sessionToken ? 'exists' : 'missing',

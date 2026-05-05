@@ -7,6 +7,7 @@ import Icon from '@/app/components/Icon';
 interface User {
   id: string;
   email: string;
+  password: string;
   status: 'pending' | 'active';
   createdAt: string;
   lastAccessedAt?: string;
@@ -29,6 +30,7 @@ export default function AdminInvitePage() {
   // Users list state
   const [users, setUsers] = useState<User[]>([]);
   const [isLoadingUsers, setIsLoadingUsers] = useState(true);
+  const [openDropdown, setOpenDropdown] = useState<string | null>(null);
 
   // Check if already authenticated on mount
   useEffect(() => {
@@ -47,6 +49,21 @@ export default function AdminInvitePage() {
     };
     checkAuth();
   }, []);
+
+  // Close dropdown when clicking outside
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (openDropdown) {
+        const target = event.target as HTMLElement;
+        if (!target.closest('.action-container')) {
+          setOpenDropdown(null);
+        }
+      }
+    };
+
+    document.addEventListener('click', handleClickOutside);
+    return () => document.removeEventListener('click', handleClickOutside);
+  }, [openDropdown]);
 
   const handleAdminLogin = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -208,7 +225,7 @@ export default function AdminInvitePage() {
         .action-dropdown {
           display: none;
         }
-        .action-container:focus-within .action-dropdown {
+        .action-dropdown.open {
           display: block;
         }
         @media (max-width: 768px) {
@@ -326,6 +343,7 @@ export default function AdminInvitePage() {
               <thead className="bg-white border-b border-[#D4D4D4]">
                 <tr>
                   <th className="px-6 py-4 text-xs font-bold uppercase tracking-widest">Email</th>
+                  <th className="px-6 py-4 text-xs font-bold uppercase tracking-widest">Password</th>
                   <th className="px-6 py-4 text-xs font-bold uppercase tracking-widest">Sent</th>
                   <th className="px-6 py-4 text-xs font-bold uppercase tracking-widest">Status</th>
                   <th className="px-6 py-4 text-xs font-bold uppercase tracking-widest text-right">Actions</th>
@@ -335,6 +353,7 @@ export default function AdminInvitePage() {
                 {users.map((user) => (
                   <tr key={user.id} className="hover:bg-[#F9F9F9] transition-colors">
                     <td className="px-6 py-4 text-sm font-medium" data-label="Email">{user.email}</td>
+                    <td className="px-6 py-4 text-sm font-mono font-medium text-[#264C3F]" data-label="Password">{user.password}</td>
                     <td className="px-6 py-4 text-sm font-medium text-[#264C3F]/70" data-label="Sent">{formatDate(user.createdAt)}</td>
                     <td className="px-6 py-4 text-sm font-bold" data-label="Status">
                       <span className={user.status === 'active' ? 'status-active' : 'status-pending'}>
@@ -342,20 +361,32 @@ export default function AdminInvitePage() {
                       </span>
                     </td>
                     <td className="px-6 py-4 text-right" data-label="Actions">
-                      <div className="relative inline-block text-left action-container" tabIndex={0}>
-                        <button className="p-2 hover:bg-[#D4D4D4]/30 rounded-full transition-colors">
+                      <div className="relative inline-block text-left action-container">
+                        <button
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            setOpenDropdown(openDropdown === user.id ? null : user.id);
+                          }}
+                          className="p-2 hover:bg-[#D4D4D4]/30 rounded-full transition-colors"
+                        >
                           <Icon icon="lucide:more-horizontal" className="text-xl" />
                         </button>
-                        <div className="absolute right-0 mt-2 w-48 bg-white border border-[#D4D4D4] shadow-xl z-20 action-dropdown">
+                        <div className={`absolute right-0 mt-2 w-48 bg-white border border-[#D4D4D4] shadow-xl z-20 action-dropdown ${openDropdown === user.id ? 'open' : ''}`}>
                           <div className="py-1">
                             <button
-                              onClick={() => {/* Resend logic could go here */}}
+                              onClick={() => {
+                                setOpenDropdown(null);
+                                /* Resend logic could go here */
+                              }}
                               className="block w-full text-left px-4 py-2 text-xs font-medium uppercase tracking-wider hover:bg-[#E2DBCF]/30"
                             >
                               Resend Invite
                             </button>
                             <button
-                              onClick={() => handleRevokeAccess(user.email)}
+                              onClick={() => {
+                                setOpenDropdown(null);
+                                handleRevokeAccess(user.email);
+                              }}
                               className="block w-full text-left px-4 py-2 text-xs font-medium uppercase tracking-wider hover:bg-[#E2DBCF]/30 text-red-600"
                             >
                               Revoke Access
@@ -368,7 +399,7 @@ export default function AdminInvitePage() {
                 ))}
                 {users.length === 0 && (
                   <tr>
-                    <td colSpan={4} className="px-6 py-8 text-center text-sm text-gray-500">
+                    <td colSpan={5} className="px-6 py-8 text-center text-sm text-gray-500">
                       No users invited yet
                     </td>
                   </tr>

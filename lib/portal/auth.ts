@@ -97,28 +97,46 @@ export function invalidateUserSessions(email: string): void {
 export function createAdminSession(duration: number = 2 * 60 * 60 * 1000): string {
   const expiresAt = Date.now() + duration;
   const token = randomBytes(32).toString('hex');
-  // Store in memory as well for immediate requests
+  // Create a simple signed token: base64(token + ':' + expiresAt + ':' + signature)
+  const signature = hashPassword(`${token}:${expiresAt}:${SESSION_SECRET}`);
+  const sessionToken = Buffer.from(`${token}:${expiresAt}:${signature}`).toString('base64');
+  // Store in memory as well for immediate requests (though this will be lost on redeploy)
   sessions.set(token, { email: 'ADMIN', expiresAt });
-  // Return token with expiry info encoded for validation
-  return `${token}:${expiresAt}`;
+  return sessionToken;
 }
 
 // Check if session is admin
 export function isAdminSession(token: string): boolean {
-  // Handle both new format (token:expiry) and old format (just token)
-  const [sessionToken, expiryStr] = token.split(':');
+  try {
+    // Decode the base64 token
+    const decoded = Buffer.from(token, 'base64').toString('utf-8');
+    const [sessionToken, expiresAtStr, signature] = decoded.split(':');
 
-  if (expiryStr) {
-    // New format: validate expiry and check memory
-    const expiresAt = parseInt(expiryStr, 10);
-    if (Date.now() > expiresAt) {
-      return false; // Expired
+    if (!sessionToken || !expiresAtStr || !signature) {
+      return false;
     }
-  }
 
-  // Check in-memory sessions
-  const session = sessions.get(sessionToken || token);
-  return session?.email === 'ADMIN';
+    // Check if expired
+    const expiresAt = parseInt(expiresAtStr, 10);
+    if (isNaN(expiresAt) || Date.now() > expiresAt) {
+      return false;
+    }
+
+    // Verify signature
+    const expectedSignature = hashPassword(`${sessionToken}:${expiresAtStr}:${SESSION_SECRET}`);
+    if (signature !== expectedSignature) {
+      return false;
+    }
+
+    // Optionally check in-memory sessions for extra security
+    // But the signature validation is sufficient for Vercel compatibility
+    const session = sessions.get(sessionToken);
+    return session?.email === 'ADMIN' || true; // Allow if signature is valid
+
+  } catch (error) {
+    console.warn('[Auth] Invalid admin session token', error);
+    return false;
+  }
 }
 
 // Clean up expired sessions periodically

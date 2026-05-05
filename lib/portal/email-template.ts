@@ -66,15 +66,15 @@ export function generateInviteEmail({
           <div style="margin: 0;">
             <div style="display: flex; justify-content: space-between; align-items: center; padding-bottom: 12px; border-bottom: 1px solid #E2DBCF; margin-bottom: 16px;">
               <span style="color: #9E8461; font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; min-width: 100px;">Email</span>
-              <span style="color: #264C3F; font-size: 14px; font-weight: 500; text-align: right;">${recipientEmail}</span>
+              <span style="color: #264C3F; font-size: 14px; font-weight: 500; display: block; text-align: right;">${recipientEmail}</span>
             </div>
             <div style="display: flex; justify-content: space-between; align-items: center; padding-bottom: 12px; border-bottom: 1px solid #E2DBCF; margin-bottom: 16px;">
               <span style="color: #9E8461; font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; min-width: 100px;">Password</span>
-              <span style="color: #264C3F; font-size: 14px; font-weight: 500; font-family: 'Courier New', monospace; text-align: right;">${password}</span>
+              <span style="color: #264C3F; font-size: 14px; font-weight: 500; font-family: 'Courier New', monospace; display: block; text-align: right;">${password}</span>
             </div>
             <div style="display: flex; justify-content: space-between; align-items: center; padding-top: 8px;">
               <span style="color: #9E8461; font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; min-width: 100px;">Portal URL</span>
-              <a href="${portalUrl}" style="color: #264C3F; font-size: 14px; font-weight: 700; text-decoration: underline; text-underline-offset: 4px; text-align: right;">xecuit.com/portal</a>
+              <a href="${portalUrl}" style="color: #264C3F; font-size: 14px; font-weight: 700; text-decoration: underline; text-underline-offset: 4px; display: block; text-align: right;">xecuit.com/portal</a>
             </div>
           </div>
         </div>
