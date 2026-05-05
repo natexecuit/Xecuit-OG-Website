@@ -87,12 +87,12 @@ export async function POST(request: NextRequest) {
           html: generateInviteEmail({
             recipientEmail: email,
             password: finalPassword,
-            portalUrl: 'https://portal.xecuit.com',
+            portalUrl: 'https://xecuit.com/portal',
           }),
           text: generateInviteEmailText({
             recipientEmail: email,
             password: finalPassword,
-            portalUrl: 'https://portal.xecuit.com',
+            portalUrl: 'https://xecuit.com/portal',
           }),
         });
 

@@ -93,16 +93,31 @@ export function invalidateUserSessions(email: string): void {
 }
 
 // Create admin session (for invite page)
+// Uses a token-based approach that includes expiry for Vercel compatibility
 export function createAdminSession(duration: number = 2 * 60 * 60 * 1000): string {
-  const token = generateSessionToken();
   const expiresAt = Date.now() + duration;
+  const token = randomBytes(32).toString('hex');
+  // Store in memory as well for immediate requests
   sessions.set(token, { email: 'ADMIN', expiresAt });
-  return token;
+  // Return token with expiry info encoded for validation
+  return `${token}:${expiresAt}`;
 }
 
 // Check if session is admin
 export function isAdminSession(token: string): boolean {
-  const session = getSession(token);
+  // Handle both new format (token:expiry) and old format (just token)
+  const [sessionToken, expiryStr] = token.split(':');
+
+  if (expiryStr) {
+    // New format: validate expiry and check memory
+    const expiresAt = parseInt(expiryStr, 10);
+    if (Date.now() > expiresAt) {
+      return false; // Expired
+    }
+  }
+
+  // Check in-memory sessions
+  const session = sessions.get(sessionToken || token);
   return session?.email === 'ADMIN';
 }
 
