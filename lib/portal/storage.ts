@@ -3,10 +3,20 @@
 
 import { Redis } from '@upstash/redis';
 
+// Check if environment variables are set
+const redisUrl = process.env.UPSTASH_REDIS_REST_URL;
+const redisToken = process.env.UPSTASH_REDIS_REST_TOKEN;
+
+if (!redisUrl || !redisToken) {
+  console.error('[Storage] Redis environment variables not set');
+  console.error('[Storage] UPSTASH_REDIS_REST_URL:', redisUrl ? 'SET' : 'NOT SET');
+  console.error('[Storage] UPSTASH_REDIS_REST_TOKEN:', redisToken ? 'SET' : 'NOT SET');
+}
+
 // Initialize Redis client with environment variables
 const redis = new Redis({
-  url: process.env.UPSTASH_REDIS_REST_URL!,
-  token: process.env.UPSTASH_REDIS_REST_TOKEN!,
+  url: redisUrl || '',
+  token: redisToken || '',
 });
 
 const USERS_KEY = 'portal-users';
@@ -33,8 +43,11 @@ async function getUsers(): Promise<PortalUser[]> {
         passwordHash: user.passwordHash || '',
       }));
     }
-  } catch (error) {
+  } catch (error: any) {
     console.error('[Storage] Failed to get users from Redis:', error);
+    if (error.message && error.message.includes('parse URL')) {
+      throw new Error('Redis configuration error: UPSTASH_REDIS_REST_URL environment variable is missing or invalid. Please check your Vercel environment variables.');
+    }
   }
   return [];
 }
