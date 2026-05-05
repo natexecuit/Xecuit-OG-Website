@@ -3,6 +3,7 @@ import { getAllUsers, createUser, deleteUser, getUserByEmail } from '@/lib/porta
 import { hashPassword, getSession, isAdminSession } from '@/lib/portal/auth';
 import { Resend } from 'resend';
 import { generateInviteEmail, generateInviteEmailText } from '@/lib/portal/email-template';
+import { trackInviteSent, trackUserRevoked } from '@/lib/analytics';
 
 const resend = process.env.RESEND_API_KEY ? new Resend(process.env.RESEND_API_KEY) : null;
 
@@ -78,6 +79,9 @@ export async function POST(request: NextRequest) {
     // Create user
     const passwordHash = hashPassword(finalPassword);
     const user = await createUser(email, finalPassword, passwordHash);
+
+    // Track invite sent event
+    await trackInviteSent(email, 'admin');
 
     // Send invite email
     let emailSent = false;
@@ -162,6 +166,9 @@ export async function DELETE(request: NextRequest) {
         { status: 404 }
       );
     }
+
+    // Track user revoked event
+    await trackUserRevoked(email, 'admin');
 
     return NextResponse.json({
       success: true,

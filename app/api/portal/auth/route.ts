@@ -3,6 +3,7 @@ import { getUserByEmail, updateUserStatus } from '@/lib/portal/storage';
 import { verifyPassword, createSession } from '@/lib/portal/auth';
 import { rateLimit } from '@/lib/rate-limit';
 import { cookies } from 'next/headers';
+import { trackUserLogin, trackFailedLogin, trackAdminLogin } from '@/lib/analytics';
 
 export async function POST(request: NextRequest) {
   try {
@@ -45,6 +46,7 @@ export async function POST(request: NextRequest) {
     const user = await getUserByEmail(email);
     if (!user) {
       console.log('[Portal Auth] User not found:', email);
+      await trackFailedLogin(email, 'User not found');
       return NextResponse.json(
         { error: 'Invalid credentials' },
         { status: 401 }
@@ -57,6 +59,7 @@ export async function POST(request: NextRequest) {
     console.log('[Portal Auth] Password valid:', passwordValid);
 
     if (!passwordValid) {
+      await trackFailedLogin(email, 'Invalid password');
       return NextResponse.json(
         { error: 'Invalid credentials' },
         { status: 401 }
@@ -70,6 +73,9 @@ export async function POST(request: NextRequest) {
 
     // Create session
     const sessionToken = createSession(email);
+
+    // Track successful login
+    await trackUserLogin(email);
 
     // Build cookie string
     const maxAge = 24 * 60 * 60; // 24 hours

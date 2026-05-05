@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from 'next/server';
 import { verifyAdminPassword, createAdminSession } from '@/lib/portal/auth';
 import { rateLimit } from '@/lib/rate-limit';
 import { cookies } from 'next/headers';
+import { trackAdminLogin } from '@/lib/analytics';
 
 export async function POST(request: NextRequest) {
   try {
@@ -39,6 +40,9 @@ export async function POST(request: NextRequest) {
 
     // Create admin session
     const sessionToken = createAdminSession();
+
+    // Track admin login
+    await trackAdminLogin();
 
     // Build cookie string
     const maxAge = 2 * 60 * 60; // 2 hours

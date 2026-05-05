@@ -3,6 +3,7 @@
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import Icon from '@/app/components/Icon';
+import { usePostHog, trackDocumentView, trackDocumentDownload } from '@/app/components/PostHogProvider';
 
 interface Document {
   id: string;
@@ -19,6 +20,7 @@ interface Document {
 
 export default function PortalDashboard() {
   const router = useRouter();
+  const posthog = usePostHog();
   const [userEmail, setUserEmail] = useState('');
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
@@ -28,8 +30,18 @@ export default function PortalDashboard() {
     if (container) {
       const email = container.getAttribute('data-user-email') || '';
       setUserEmail(email);
+
+      // Identify user in PostHog
+      if (posthog && email) {
+        posthog.identify(email, { email });
+
+        // Track dashboard view
+        posthog.capture('$pageview', {
+          $current_url: '/portal/dashboard',
+        });
+      }
     }
-  }, []);
+  }, [posthog]);
 
   // Document data - in a real app, this would come from a database
   const documents: Document[] = [
@@ -91,10 +103,12 @@ export default function PortalDashboard() {
   };
 
   const handleView = (doc: Document) => {
+    trackDocumentView(doc.id, doc.title, posthog);
     window.open(doc.fileUrl, '_blank');
   };
 
   const handleDownload = (doc: Document) => {
+    trackDocumentDownload(doc.id, doc.title, posthog);
     const link = document.createElement('a');
     link.href = doc.downloadUrl || doc.fileUrl;
     link.download = doc.downloadName || `${doc.title.toLowerCase().replace(/\s+/g, '-')}.pdf`;
