@@ -40,4 +40,11 @@ yarn-error.log*
 *.tsbuildinfo
 next-env.d.ts
 
+# vercel
 .vercel
+
+# portal data
+/data/portal-users.json
+
+# portal documents (if storing sensitive files)
+# /public/documents/
