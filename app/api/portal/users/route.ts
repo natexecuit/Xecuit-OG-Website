@@ -46,7 +46,7 @@ export async function POST(request: NextRequest) {
     }
 
     const body = await request.json();
-    const { email, cc, password, autoGeneratePassword } = body;
+    const { email, cc, bcc, password, autoGeneratePassword } = body;
 
     if (!email) {
       return NextResponse.json(
@@ -108,6 +108,11 @@ export async function POST(request: NextRequest) {
         // Add CC if provided
         if (cc) {
           emailParams.cc = cc;
+        }
+
+        // Add BCC if provided
+        if (bcc) {
+          emailParams.bcc = bcc;
         }
 
         const { error } = await resend.emails.send(emailParams);

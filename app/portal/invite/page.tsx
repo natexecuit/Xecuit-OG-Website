@@ -23,6 +23,7 @@ export default function AdminInvitePage() {
   // Invite form state
   const [email, setEmail] = useState('');
   const [ccEmail, setCcEmail] = useState('');
+  const [bccEmail, setBccEmail] = useState('');
   const [invitePassword, setInvitePassword] = useState('');
   const [autoGeneratePassword, setAutoGeneratePassword] = useState(true);
   const [isSendingInvite, setIsSendingInvite] = useState(false);
@@ -111,6 +112,17 @@ export default function AdminInvitePage() {
       }
     }
 
+    // Validate BCC email if provided
+    if (bccEmail) {
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      if (!emailRegex.test(bccEmail)) {
+        setSuccessMessage('✗ Invalid BCC email address');
+        setTimeout(() => setSuccessMessage(''), 5000);
+        setIsSendingInvite(false);
+        return;
+      }
+    }
+
     try {
       const response = await fetch('/api/portal/users', {
         method: 'POST',
@@ -118,6 +130,7 @@ export default function AdminInvitePage() {
         body: JSON.stringify({
           email,
           cc: ccEmail || undefined,
+          bcc: bccEmail || undefined,
           password: autoGeneratePassword ? undefined : invitePassword,
           autoGeneratePassword,
         }),
@@ -129,9 +142,14 @@ export default function AdminInvitePage() {
         throw new Error(data.error || 'Failed to send invite');
       }
 
-      setSuccessMessage(`✓ Invite sent to ${email}${ccEmail ? ` (CC: ${ccEmail})` : ''}${data.password ? ` (Password: ${data.password})` : ''}`);
+      const copyRecipients = [];
+      if (ccEmail) copyRecipients.push(`CC: ${ccEmail}`);
+      if (bccEmail) copyRecipients.push(`BCC: ${bccEmail}`);
+
+      setSuccessMessage(`✓ Invite sent to ${email}${copyRecipients.length ? ` (${copyRecipients.join(', ')})` : ''}${data.password ? ` (Password: ${data.password})` : ''}`);
       setEmail('');
       setCcEmail('');
+      setBccEmail('');
       setInvitePassword('');
       await loadUsers();
 
@@ -367,19 +385,20 @@ export default function AdminInvitePage() {
           </div>
 
           <form onSubmit={handleSendInvite} className="space-y-6">
+            <div className="space-y-2">
+              <label className="text-xs font-medium uppercase tracking-widest text-[#264C3F]">Email Address *</label>
+              <input
+                type="email"
+                required
+                placeholder="broker@institutional.com"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                disabled={isSendingInvite}
+                className="w-full px-4 py-3 rounded-none input-field text-sm font-medium"
+              />
+            </div>
+
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              <div className="space-y-2">
-                <label className="text-xs font-medium uppercase tracking-widest text-[#264C3F]">Email Address *</label>
-                <input
-                  type="email"
-                  required
-                  placeholder="broker@institutional.com"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  disabled={isSendingInvite}
-                  className="w-full px-4 py-3 rounded-none input-field text-sm font-medium"
-                />
-              </div>
               <div className="space-y-2">
                 <label className="text-xs font-medium uppercase tracking-widest text-[#264C3F]">CC Email (Optional)</label>
                 <input
@@ -387,6 +406,17 @@ export default function AdminInvitePage() {
                   placeholder="cc@example.com"
                   value={ccEmail}
                   onChange={(e) => setCcEmail(e.target.value)}
+                  disabled={isSendingInvite}
+                  className="w-full px-4 py-3 rounded-none input-field text-sm font-medium"
+                />
+              </div>
+              <div className="space-y-2">
+                <label className="text-xs font-medium uppercase tracking-widest text-[#264C3F]">BCC Email (Optional)</label>
+                <input
+                  type="email"
+                  placeholder="bcc@example.com"
+                  value={bccEmail}
+                  onChange={(e) => setBccEmail(e.target.value)}
                   disabled={isSendingInvite}
                   className="w-full px-4 py-3 rounded-none input-field text-sm font-medium"
                 />
