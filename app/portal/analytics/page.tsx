@@ -197,31 +197,31 @@ export default function AnalyticsPage() {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-6 mb-12">
           <StatCard
             title="Total Users"
-            value={data.totalUsers}
+            value={data?.totalUsers || 0}
             icon="👥"
             color="bg-[#264C3F]"
           />
           <StatCard
             title="Active Users"
-            value={data.activeUsers}
+            value={data?.activeUsers || 0}
             icon="✅"
             color="bg-[#4CAF50]"
           />
           <StatCard
             title="Total Sessions"
-            value={data.totalSessions}
+            value={data?.totalSessions || 0}
             icon="🔄"
             color="bg-[#9E8461]"
           />
           <StatCard
             title="Document Views"
-            value={data.totalDocumentViews}
+            value={data?.totalDocumentViews || 0}
             icon="👁️"
             color="bg-[#264C3F]"
           />
           <StatCard
             title="Downloads"
-            value={data.totalDownloads}
+            value={data?.totalDownloads || 0}
             icon="📥"
             color="bg-[#264C3F]"
           />
@@ -231,11 +231,11 @@ export default function AnalyticsPage() {
         <section>
           <h2 className="text-2xl font-bold text-[#264C3F] mb-6">RECENT ACTIVITY</h2>
           <div className="bg-white border border-[#D4D4D4] rounded-sm overflow-hidden">
-            {data.recentActivity.length === 0 ? (
+            {data?.recentActivity && data.recentActivity.length === 0 ? (
               <div className="p-8 text-center text-gray-500">No activity yet</div>
             ) : (
               <div className="divide-y divide-[#E2DBCF]">
-                {data.recentActivity.map((activity, index) => (
+                {data?.recentActivity?.map((activity, index) => (
                   <ActivityRow
                     key={index}
                     activity={activity}
@@ -243,7 +243,7 @@ export default function AnalyticsPage() {
                     getEventIcon={getEventIcon}
                     formatDate={formatDate}
                   />
-                ))}
+                )) || null}
               </div>
             )}
           </div>
