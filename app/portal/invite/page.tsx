@@ -22,6 +22,7 @@ export default function AdminInvitePage() {
 
   // Invite form state
   const [email, setEmail] = useState('');
+  const [ccEmail, setCcEmail] = useState('');
   const [invitePassword, setInvitePassword] = useState('');
   const [autoGeneratePassword, setAutoGeneratePassword] = useState(true);
   const [isSendingInvite, setIsSendingInvite] = useState(false);
@@ -99,12 +100,24 @@ export default function AdminInvitePage() {
     setIsSendingInvite(true);
     setSuccessMessage('');
 
+    // Validate CC email if provided
+    if (ccEmail) {
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      if (!emailRegex.test(ccEmail)) {
+        setSuccessMessage('✗ Invalid CC email address');
+        setTimeout(() => setSuccessMessage(''), 5000);
+        setIsSendingInvite(false);
+        return;
+      }
+    }
+
     try {
       const response = await fetch('/api/portal/users', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           email,
+          cc: ccEmail || undefined,
           password: autoGeneratePassword ? undefined : invitePassword,
           autoGeneratePassword,
         }),
@@ -116,8 +129,9 @@ export default function AdminInvitePage() {
         throw new Error(data.error || 'Failed to send invite');
       }
 
-      setSuccessMessage(`✓ Invite sent to ${email}${data.password ? ` (Password: ${data.password})` : ''}`);
+      setSuccessMessage(`✓ Invite sent to ${email}${ccEmail ? ` (CC: ${ccEmail})` : ''}${data.password ? ` (Password: ${data.password})` : ''}`);
       setEmail('');
+      setCcEmail('');
       setInvitePassword('');
       await loadUsers();
 
@@ -367,17 +381,29 @@ export default function AdminInvitePage() {
                 />
               </div>
               <div className="space-y-2">
-                <label className="text-xs font-medium uppercase tracking-widest text-[#264C3F]">Password *</label>
+                <label className="text-xs font-medium uppercase tracking-widest text-[#264C3F]">CC Email (Optional)</label>
                 <input
-                  type="password"
-                  required={!autoGeneratePassword}
-                  placeholder={autoGeneratePassword ? 'Auto-generated' : '••••••••'}
-                  value={invitePassword}
-                  onChange={(e) => setInvitePassword(e.target.value)}
-                  disabled={autoGeneratePassword || isSendingInvite}
-                  className="w-full px-4 py-3 rounded-none input-field text-sm font-medium disabled:opacity-50"
+                  type="email"
+                  placeholder="cc@example.com"
+                  value={ccEmail}
+                  onChange={(e) => setCcEmail(e.target.value)}
+                  disabled={isSendingInvite}
+                  className="w-full px-4 py-3 rounded-none input-field text-sm font-medium"
                 />
               </div>
+            </div>
+
+            <div className="space-y-2">
+              <label className="text-xs font-medium uppercase tracking-widest text-[#264C3F]">Password *</label>
+              <input
+                type="password"
+                required={!autoGeneratePassword}
+                placeholder={autoGeneratePassword ? 'Auto-generated' : '••••••••'}
+                value={invitePassword}
+                onChange={(e) => setInvitePassword(e.target.value)}
+                disabled={autoGeneratePassword || isSendingInvite}
+                className="w-full px-4 py-3 rounded-none input-field text-sm font-medium disabled:opacity-50"
+              />
             </div>
 
             <div className="flex items-center gap-3">

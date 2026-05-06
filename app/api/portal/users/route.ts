@@ -46,7 +46,7 @@ export async function POST(request: NextRequest) {
     }
 
     const body = await request.json();
-    const { email, password, autoGeneratePassword } = body;
+    const { email, cc, password, autoGeneratePassword } = body;
 
     if (!email) {
       return NextResponse.json(
@@ -89,7 +89,7 @@ export async function POST(request: NextRequest) {
 
     if (resend) {
       try {
-        const { error } = await resend.emails.send({
+        const emailParams: any = {
           from: 'Xecuit Portal <portal@xecuit.com>',
           to: email,
           subject: 'Xecuit Counterparty Access Portal - Your Access Credentials',
@@ -103,7 +103,14 @@ export async function POST(request: NextRequest) {
             password: finalPassword,
             portalUrl: 'https://xecuit.com/portal',
           }),
-        });
+        };
+
+        // Add CC if provided
+        if (cc) {
+          emailParams.cc = cc;
+        }
+
+        const { error } = await resend.emails.send(emailParams);
 
         if (error) {
           emailError = error.message;
