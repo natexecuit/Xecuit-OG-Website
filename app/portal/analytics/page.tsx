@@ -18,6 +18,8 @@ interface ActivityEvent {
   properties?: {
     documentTitle?: string;
     documentId?: string;
+    inviteEmail?: string;
+    [key: string]: any;
   };
 }
 
