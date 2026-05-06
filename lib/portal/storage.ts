@@ -115,6 +115,20 @@ export async function updateUserStatus(email: string, status: 'pending' | 'activ
   }
 }
 
+// Update user password
+export async function updateUserPassword(userId: string, newPassword: string, newPasswordHash: string): Promise<boolean> {
+  const users = await getUsers();
+  const userIndex = users.findIndex(u => u.id === userId);
+
+  if (userIndex !== -1) {
+    users[userIndex].password = newPassword;
+    users[userIndex].passwordHash = newPasswordHash;
+    await saveUsers(users);
+    return true;
+  }
+  return false;
+}
+
 // Delete user
 export async function deleteUser(email: string): Promise<boolean> {
   const users = await getUsers();

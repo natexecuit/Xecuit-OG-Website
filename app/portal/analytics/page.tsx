@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from 'react';
+import { useRouter } from 'next/navigation';
 
 interface AnalyticsData {
   totalUsers: number;
@@ -24,17 +25,36 @@ interface ActivityEvent {
 }
 
 export default function AnalyticsPage() {
+  const router = useRouter();
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [loading, setLoading] = useState(true);
   const [data, setData] = useState<AnalyticsData | null>(null);
   const [error, setError] = useState<string | null>(null);
 
+  // Check admin authentication on mount
   useEffect(() => {
-    fetchAnalyticsData();
-  }, []);
+    const checkAuth = async () => {
+      try {
+        const response = await fetch('/api/portal/users');
+        if (response.ok) {
+          setIsAuthenticated(true);
+          await fetchAnalyticsData();
+        } else {
+          // Not authenticated, redirect to admin login
+          router.push('/portal/invite');
+        }
+      } catch (error) {
+        // Not authenticated, redirect to admin login
+        router.push('/portal/invite');
+      } finally {
+        setLoading(false);
+      }
+    };
+    checkAuth();
+  }, [router]);
 
   const fetchAnalyticsData = async () => {
     try {
-      setLoading(true);
       setError(null);
 
       // In a real implementation, you'd fetch from PostHog API
@@ -139,6 +159,17 @@ export default function AnalyticsPage() {
     return icons[event] || '📊';
   };
 
+  if (!isAuthenticated) {
+    return (
+      <div className="min-h-screen flex items-center justify-center bg-[#E2DBCF]">
+        <div className="text-center">
+          <div className="inline-block animate-spin rounded-full h-8 w-8 border-b-2 border-[#264C3F]"></div>
+          <p className="mt-4 text-[#264C3F]/70">Verifying access...</p>
+        </div>
+      </div>
+    );
+  }
+
   if (loading) {
     return (
       <div className="min-h-screen flex items-center justify-center bg-[#E2DBCF]">
@@ -175,10 +206,10 @@ export default function AnalyticsPage() {
         <div className="max-w-7xl mx-auto px-4 md:px-8 h-20 flex items-center justify-between">
           <div className="flex items-center gap-4">
             <button
-              onClick={() => window.history.back()}
+              onClick={() => router.push('/portal/invite')}
               className="text-[#E2DBCF]/70 hover:text-[#E2DBCF] transition-colors"
             >
-              ← Back
+              ← Back to Admin Panel
             </button>
             <h1 className="text-lg font-medium tracking-tight">PORTAL ANALYTICS</h1>
           </div>

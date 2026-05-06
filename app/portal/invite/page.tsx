@@ -30,8 +30,11 @@ export default function AdminInvitePage() {
   // Users list state
   const [users, setUsers] = useState<User[]>([]);
   const [isLoadingUsers, setIsLoadingUsers] = useState(true);
-  const [openDropdown, setOpenDropdown] = useState<string | null>(null);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+
+  // Password editing state
+  const [editingPassword, setEditingPassword] = useState<string | null>(null);
+  const [tempPassword, setTempPassword] = useState('');
 
   // Check if already authenticated on mount
   useEffect(() => {
@@ -50,21 +53,6 @@ export default function AdminInvitePage() {
     };
     checkAuth();
   }, []);
-
-  // Close dropdown when clicking outside
-  useEffect(() => {
-    const handleClickOutside = (event: MouseEvent) => {
-      if (openDropdown) {
-        const target = event.target as HTMLElement;
-        if (!target.closest('.action-container')) {
-          setOpenDropdown(null);
-        }
-      }
-    };
-
-    document.addEventListener('click', handleClickOutside);
-    return () => document.removeEventListener('click', handleClickOutside);
-  }, [openDropdown]);
 
   const handleAdminLogin = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -153,14 +141,80 @@ export default function AdminInvitePage() {
       });
 
       if (response.ok) {
+        setSuccessMessage(`✓ Access revoked for ${userEmail}`);
         await loadUsers();
+        setTimeout(() => setSuccessMessage(''), 5000);
       } else {
         const data = await response.json();
-        alert(data.error || 'Failed to revoke access');
+        setSuccessMessage(`✗ ${data.error || 'Failed to revoke access'}`);
+        setTimeout(() => setSuccessMessage(''), 5000);
       }
     } catch (error) {
-      alert('Failed to revoke access');
+      setSuccessMessage(`✗ Failed to revoke access`);
+      setTimeout(() => setSuccessMessage(''), 5000);
     }
+  };
+
+  const handleResendInvite = (userEmail: string) => {
+    setSuccessMessage(`✓ Resend invite to ${userEmail}`);
+    setTimeout(() => setSuccessMessage(''), 5000);
+    // TODO: Implement actual resend functionality
+  };
+
+  const handleLogout = async () => {
+    try {
+      await fetch('/api/portal/logout', { method: 'POST' });
+      setIsAuthenticated(false);
+      router.push('/portal/invite');
+    } catch (error) {
+      console.error('Logout error:', error);
+      // Still redirect even on error
+      setIsAuthenticated(false);
+      router.push('/portal/invite');
+    }
+  };
+
+  const handleStartPasswordEdit = (userId: string, currentPassword: string) => {
+    setEditingPassword(userId);
+    setTempPassword(currentPassword);
+  };
+
+  const handleSavePassword = async (userId: string, event?: React.KeyboardEvent) => {
+    if (event && event.key !== 'Enter') return;
+
+    if (!tempPassword || tempPassword.length < 8) {
+      setSuccessMessage('✗ Password must be at least 8 characters');
+      setTimeout(() => setSuccessMessage(''), 5000);
+      return;
+    }
+
+    try {
+      const response = await fetch(`/api/portal/users/${userId}/password`, {
+        method: 'PATCH',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ password: tempPassword }),
+      });
+
+      if (response.ok) {
+        setSuccessMessage('✓ Password updated successfully');
+        await loadUsers();
+        setEditingPassword(null);
+        setTempPassword('');
+        setTimeout(() => setSuccessMessage(''), 5000);
+      } else {
+        const data = await response.json();
+        setSuccessMessage(`✗ ${data.error || 'Failed to update password'}`);
+        setTimeout(() => setSuccessMessage(''), 5000);
+      }
+    } catch (error) {
+      setSuccessMessage('✗ Failed to update password');
+      setTimeout(() => setSuccessMessage(''), 5000);
+    }
+  };
+
+  const handleCancelPasswordEdit = () => {
+    setEditingPassword(null);
+    setTempPassword('');
   };
 
   const formatDate = (dateString: string) => {
@@ -223,12 +277,6 @@ export default function AdminInvitePage() {
         }
         .status-active { color: #4CAF50; }
         .status-pending { color: #999999; }
-        .action-dropdown {
-          display: none;
-        }
-        .action-dropdown.open {
-          display: block;
-        }
         @media (max-width: 768px) {
           .table-responsive thead { display: none; }
           .table-responsive tr { display: block; margin-bottom: 1rem; border: 1px solid #D4D4D4; border-radius: 0.5rem; padding: 1rem; }
@@ -256,7 +304,7 @@ export default function AdminInvitePage() {
             Analytics
           </button>
           <button
-            onClick={() => router.push('/portal/login')}
+            onClick={handleLogout}
             className="text-sm font-medium hover:text-[#9E8461] transition-colors uppercase tracking-wider"
           >
             Logout
@@ -284,7 +332,7 @@ export default function AdminInvitePage() {
               Analytics
             </button>
             <button
-              onClick={() => { router.push('/portal/login'); setIsMobileMenuOpen(false); }}
+              onClick={() => { handleLogout(); setIsMobileMenuOpen(false); }}
               className="text-sm font-medium text-[#264C3F] hover:text-[#9E8461] transition-colors text-left"
             >
               Logout
@@ -385,7 +433,39 @@ export default function AdminInvitePage() {
                 {users.map((user) => (
                   <tr key={user.id} className="hover:bg-[#F9F9F9] transition-colors">
                     <td className="px-6 py-4 text-sm font-medium" data-label="Email">{user.email}</td>
-                    <td className="px-6 py-4 text-sm font-mono font-medium text-[#264C3F]" data-label="Password">{user.password}</td>
+                    <td className="px-6 py-4 text-sm font-mono font-medium text-[#264C3F]" data-label="Password">
+                      {editingPassword === user.id ? (
+                        <input
+                          type="text"
+                          value={tempPassword}
+                          onChange={(e) => setTempPassword(e.target.value)}
+                          onKeyDown={(e) => {
+                            if (e.key === 'Enter') {
+                              handleSavePassword(user.id, e);
+                            } else if (e.key === 'Escape') {
+                              handleCancelPasswordEdit();
+                            }
+                          }}
+                          onBlur={() => handleCancelPasswordEdit()}
+                          autoFocus
+                          className="w-48 px-2 py-1 border border-[#264C3F] text-sm font-mono font-medium focus:outline-none focus:ring-1 focus:ring-[#264C3F]"
+                        />
+                      ) : (
+                        <div className="flex items-center gap-2">
+                          <span>{user.password}</span>
+                          <button
+                            onClick={(e) => {
+                              e.stopPropagation();
+                              handleStartPasswordEdit(user.id, user.password);
+                            }}
+                            className="p-1 hover:bg-[#E2DBCF]/50 rounded transition-colors"
+                            title="Edit password"
+                          >
+                            <Icon icon="lucide:pencil" className="text-sm text-[#264C3F]/70 hover:text-[#264C3F]" />
+                          </button>
+                        </div>
+                      )}
+                    </td>
                     <td className="px-6 py-4 text-sm font-medium text-[#264C3F]/70" data-label="Sent">{formatDate(user.createdAt)}</td>
                     <td className="px-6 py-4 text-sm font-bold" data-label="Status">
                       <span className={user.status === 'active' ? 'status-active' : 'status-pending'}>
@@ -393,38 +473,27 @@ export default function AdminInvitePage() {
                       </span>
                     </td>
                     <td className="px-6 py-4 text-right" data-label="Actions">
-                      <div className="relative inline-block text-left action-container">
+                      <div className="flex items-center justify-end gap-2">
                         <button
-                          onClick={(e) => {
-                            e.stopPropagation();
-                            setOpenDropdown(openDropdown === user.id ? null : user.id);
-                          }}
-                          className="p-2 hover:bg-[#D4D4D4]/30 rounded-full transition-colors"
+                          onClick={() => handleResendInvite(user.email)}
+                          className="p-2 hover:bg-[#E2DBCF]/50 rounded transition-colors group relative"
+                          title="Resend invite"
                         >
-                          <Icon icon="lucide:more-horizontal" className="text-xl" />
+                          <Icon icon="lucide:send" className="text-sm text-[#264C3F]/70 hover:text-[#264C3F]" />
+                          <span className="absolute bottom-full right-0 mb-2 px-2 py-1 text-xs font-medium text-white bg-[#264C3F] rounded opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap pointer-events-none">
+                            Resend Invite
+                          </span>
                         </button>
-                        <div className={`absolute right-0 mt-2 w-48 bg-white border border-[#D4D4D4] shadow-xl z-20 action-dropdown ${openDropdown === user.id ? 'open' : ''}`}>
-                          <div className="py-1">
-                            <button
-                              onClick={() => {
-                                setOpenDropdown(null);
-                                /* Resend logic could go here */
-                              }}
-                              className="block w-full text-left px-4 py-2 text-xs font-medium uppercase tracking-wider hover:bg-[#E2DBCF]/30"
-                            >
-                              Resend Invite
-                            </button>
-                            <button
-                              onClick={() => {
-                                setOpenDropdown(null);
-                                handleRevokeAccess(user.email);
-                              }}
-                              className="block w-full text-left px-4 py-2 text-xs font-medium uppercase tracking-wider hover:bg-[#E2DBCF]/30 text-red-600"
-                            >
-                              Revoke Access
-                            </button>
-                          </div>
-                        </div>
+                        <button
+                          onClick={() => handleRevokeAccess(user.email)}
+                          className="p-2 hover:bg-red-50 rounded transition-colors group relative"
+                          title="Revoke access"
+                        >
+                          <Icon icon="lucide:shield-x" className="text-sm text-red-600/70 hover:text-red-600" />
+                          <span className="absolute bottom-full right-0 mb-2 px-2 py-1 text-xs font-medium text-white bg-red-600 rounded opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap pointer-events-none">
+                            Revoke Access
+                          </span>
+                        </button>
                       </div>
                     </td>
                   </tr>
