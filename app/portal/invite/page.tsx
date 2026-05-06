@@ -31,6 +31,7 @@ export default function AdminInvitePage() {
   const [users, setUsers] = useState<User[]>([]);
   const [isLoadingUsers, setIsLoadingUsers] = useState(true);
   const [openDropdown, setOpenDropdown] = useState<string | null>(null);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   // Check if already authenticated on mount
   useEffect(() => {
@@ -246,7 +247,14 @@ export default function AdminInvitePage() {
         </div>
 
         {/* Desktop Logout */}
-        <div className="hidden md:block">
+        <div className="hidden md:flex items-center gap-6">
+          <button
+            onClick={() => router.push('/portal/analytics')}
+            className="text-sm font-medium hover:text-[#9E8461] transition-colors uppercase tracking-wider flex items-center gap-2"
+          >
+            <Icon icon="lucide:bar-chart-2" className="text-base" />
+            Analytics
+          </button>
           <button
             onClick={() => router.push('/portal/login')}
             className="text-sm font-medium hover:text-[#9E8461] transition-colors uppercase tracking-wider"
@@ -256,10 +264,34 @@ export default function AdminInvitePage() {
         </div>
 
         {/* Mobile Hamburger */}
-        <button className="md:hidden flex items-center justify-center">
-          <Icon icon="lucide:menu" className="text-2xl text-[#264C3F]" />
+        <button
+          onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+          className="md:hidden flex items-center justify-center"
+        >
+          <Icon icon={isMobileMenuOpen ? 'lucide:x' : 'lucide:menu'} className="text-2xl text-[#264C3F]" />
         </button>
       </header>
+
+      {/* Mobile Menu */}
+      {isMobileMenuOpen && (
+        <div className="md:hidden bg-white border-b border-[#D4D4D4] px-6 py-4">
+          <div className="flex flex-col gap-4">
+            <button
+              onClick={() => { router.push('/portal/analytics'); setIsMobileMenuOpen(false); }}
+              className="text-sm font-medium text-[#264C3F] hover:text-[#9E8461] transition-colors text-left flex items-center gap-2"
+            >
+              <Icon icon="lucide:bar-chart-2" className="text-base" />
+              Analytics
+            </button>
+            <button
+              onClick={() => { router.push('/portal/login'); setIsMobileMenuOpen(false); }}
+              className="text-sm font-medium text-[#264C3F] hover:text-[#9E8461] transition-colors text-left"
+            >
+              Logout
+            </button>
+          </div>
+        </div>
+      )}
 
       <main className="flex-1 w-full max-w-7xl mx-auto px-6 md:px-12 py-12 space-y-20">
 
