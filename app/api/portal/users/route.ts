@@ -92,6 +92,7 @@ export async function POST(request: NextRequest) {
         const emailParams: any = {
           from: 'Xecuit Portal <portal@xecuit.com>',
           to: email,
+          replyTo: 'engage@xecuit.com',
           subject: 'Xecuit Counterparty Access Portal - Your Access Credentials',
           html: generateInviteEmail({
             recipientEmail: email,

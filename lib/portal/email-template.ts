@@ -32,6 +32,11 @@ export function generateInviteEmail({
       .padding-mobile {
         padding: 24px !important;
       }
+      .header-content {
+        flex-direction: column !important;
+        text-align: center !important;
+        align-items: center !important;
+      }
     }
   </style>
 </head>
@@ -40,7 +45,10 @@ export function generateInviteEmail({
     <div class="email-container" style="max-width: 600px; margin: 0 auto; background: #ffffff; border: 1px solid #e5e5e5; overflow: hidden;">
       <!-- Header -->
       <div style="padding: 40px 40px 24px 40px; border-bottom: 2px solid #9E8461;">
-        <img src="https://vgbujcuwptvheqijyjbe.supabase.co/storage/v1/object/public/hmac-uploads/uploads/91674c7c-9744-4574-9bfd-0371e88f8f51/1769154265370-6f776441/Xecuit_Logo_dark_Green.png" alt="Xecuit" style="height: 32px; width: auto; display: block; margin-bottom: 16px;">
+        <div class="header-content" style="display: flex; align-items: center; gap: 16px; margin-bottom: 16px;">
+          <img src="https://maas-log-prod.cn-wlcb.ufileos.com/anthropic/99628082-b392-45ea-8a9d-bee787dad33e/5a3b738a9e3925545404fbbe6a71d6d6.png?UCloudPublicKey=TOKEN_e15ba47a-d098-4fbd-9afc-a0dcf0e4e621&Expires=1778198400&Signature=c41g1MQf5XKt//t2XrIn1OtP8vI=" alt="Xecuit" style="width: 48px; height: 48px; border-radius: 50%; display: block;">
+          <img src="https://vgbujcuwptvheqijyjbe.supabase.co/storage/v1/object/public/hmac-uploads/uploads/91674c7c-9744-4574-9bfd-0371e88f8f51/1769154265370-6f776441/Xecuit_Logo_dark_Green.png" alt="Xecuit" style="height: 32px; width: auto; display: block;">
+        </div>
         <h1 style="margin: 0; color: #264C3F; font-size: 12px; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase;">Portal Access Invitation</h1>
       </div>
 
