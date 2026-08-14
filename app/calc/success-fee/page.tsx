@@ -44,7 +44,11 @@ export default function SuccessFeePage() {
   // Calculated Results
   const [simpleResult, setSimpleResult] = useState(0);
   const [retainerResult, setRetainerResult] = useState({ retainerFee: 0, successFee: 0, totalFee: 0 });
-  const [lehmanResult, setLehmanResult] = useState({ tierFees: [], totalFee: 0, effectiveRate: 0 });
+  const [lehmanResult, setLehmanResult] = useState<{ tierFees: number[]; totalFee: number; effectiveRate: number }>({
+    tierFees: [],
+    totalFee: 0,
+    effectiveRate: 0,
+  });
 
   // Parse input value
   const parseValue = (value: string) => parseFloat(value.replace(/[^0-9.]/g, '')) || 0;

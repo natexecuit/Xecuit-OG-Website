@@ -412,36 +412,35 @@ export default function MADealAnalysisPage() {
                       <span className="text-sm text-[#264C3F]/70">Seller Financing</span>
                     </label>
                     {hasSellerFinancing && (
-                      <div className="grid md:grid-cols-2 gap-5 pl-7">
-                        <div className="grid grid-cols-3 gap-3">
-                          <InputField
-                            label="Amount"
-                            value={sellerFinancingAmount}
-                            onChange={setSellerFinancingAmount}
-                            type="currency"
-                            placeholder="500,000"
-                            prefix="$"
-                            required
-                          />
-                          <InputField
-                            label="Rate"
-                            value={sellerFinancingRate}
-                            onChange={setSellerFinancingRate}
-                            type="number"
-                            placeholder="6"
-                            suffix="%"
-                            required
-                          />
-                          <InputField
-                            label="Term"
-                            value={sellerFinancingTerm}
-                            onChange={setSellerFinancingTerm}
-                            type="number"
-                            placeholder="5"
-                            suffix="years"
-                            required
-                          />
-                        </div>
+                      <div className="grid md:grid-cols-4 gap-5 pl-7">
+                        <InputField
+                          label="Amount"
+                          value={sellerFinancingAmount}
+                          onChange={setSellerFinancingAmount}
+                          type="currency"
+                          placeholder="500,000"
+                          prefix="$"
+                          required
+                          className="md:col-span-2"
+                        />
+                        <InputField
+                          label="Rate"
+                          value={sellerFinancingRate}
+                          onChange={setSellerFinancingRate}
+                          type="number"
+                          placeholder="6"
+                          suffix="%"
+                          required
+                        />
+                        <InputField
+                          label="Term"
+                          value={sellerFinancingTerm}
+                          onChange={setSellerFinancingTerm}
+                          type="number"
+                          placeholder="5"
+                          suffix="years"
+                          required
+                        />
                         <InputField
                           label="Deferred Months"
                           value={sellerFinancingDeferred}
@@ -449,7 +448,9 @@ export default function MADealAnalysisPage() {
                           type="number"
                           placeholder="0"
                           suffix="months"
+                          className="md:col-span-1"
                         />
+                        <div className="md:col-span-3"></div>
                       </div>
                     )}
                   </div>

@@ -31,7 +31,13 @@ export default function ValuationPage() {
   // Calculated Results
   const [marginResult, setMarginResult] = useState({ margin: 0, status: '' });
   const [impliedResult, setImpliedResult] = useState({ enterpriseValue: 0, multiple: 0 });
-  const [compsResult, setCompsResult] = useState({
+  const [compsResult, setCompsResult] = useState<{
+    minValuation: number;
+    maxValuation: number;
+    avgMultiple: number;
+    impliedValuation: number;
+    comps: Array<{ name: string; multiple: number; valuation: number }>;
+  }>({
     minValuation: 0,
     maxValuation: 0,
     avgMultiple: 0,

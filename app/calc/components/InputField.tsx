@@ -57,7 +57,7 @@ export function InputField({
   };
 
   const handleBlur = () => {
-    if (type === 'currency' && displayValue) {
+    if ((type === 'currency' || type === 'number') && displayValue) {
       const numValue = parseFloat(displayValue);
       if (!isNaN(numValue)) {
         setDisplayValue(numValue.toLocaleString('en-US', {
@@ -69,7 +69,7 @@ export function InputField({
   };
 
   const handleFocus = () => {
-    if (type === 'currency') {
+    if (type === 'currency' || type === 'number') {
       // Remove formatting on focus
       const numValue = parseFloat(displayValue.replace(/,/g, ''));
       if (!isNaN(numValue)) {
